@@ -1,10 +1,11 @@
-import createAccountService from '../../../../services/accounts/createAccount.service';
+import sessionLoginService from '../../../../services/sessions/sessionsLogin.service';
 import { DataSource } from 'typeorm';
 import AppDataSource from '../../../../data-source';
 import { accountData } from '../../../mocks/account';
-import { invalidAccountData } from '../../../mocks/account/index';
+import { loginData } from '../../../mocks/session';
+import createAccountService from '../../../../services/accounts/createAccount.service';
 
-describe('Create an account', () => {
+describe('Login', () => {
     let connection: DataSource;
 
     beforeAll(async () => {
@@ -19,17 +20,16 @@ describe('Create an account', () => {
         await connection.destroy();
     });
 
-    test('Must enter a new account in the database', async () => {
-        const response = await createAccountService(accountData);
+    test('It must be possible to login with valid data', async () => {
+        await createAccountService(accountData);
+
+        const response = await sessionLoginService(loginData);
 
         expect(response).toEqual(
             expect.objectContaining({
-                email: accountData.email,
-                id: response.id,
-                is_admin: false
+                token: response.token
             })
         );
-
-        expect(response).not.toContain('password');
+        expect(response.token).toHaveLength(209);
     });
 });
