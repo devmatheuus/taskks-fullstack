@@ -25,10 +25,11 @@ describe('Create an account', () => {
         expect(newAccount).toEqual(
             expect.objectContaining({
                 email: accountData.email,
-                password: accountData.password,
                 id: newAccount.id,
                 is_admin: false
             })
         );
+
+        expect(newAccount).not.toContain('password');
     });
 });

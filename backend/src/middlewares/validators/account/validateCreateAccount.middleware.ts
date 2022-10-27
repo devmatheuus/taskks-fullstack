@@ -8,13 +8,7 @@ export const createAccountSchema: yup.SchemaOf<IAccountRequest> = yup
     .object()
     .shape({
         email: yup.string().email().required().max(50),
-        password: yup
-            .string()
-            .required()
-            .max(150)
-            .transform((value, originalValue) => {
-                return hashSync(originalValue, 10);
-            })
+        password: yup.string().required().min(5).max(150)
     });
 
 export const validateAccountCreate =

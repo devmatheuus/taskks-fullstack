@@ -3,7 +3,8 @@ export interface IAccountRequest {
     password: string;
 }
 
-export interface IAccountResponse extends IAccountRequest {
+export interface IAccountResponse {
     id: string;
     is_admin: boolean;
+    email: string;
 }
