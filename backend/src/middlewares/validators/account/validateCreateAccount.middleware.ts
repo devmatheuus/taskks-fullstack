@@ -36,6 +36,8 @@ export const validateAccountCreate =
                 throw new AppError(400, error.errors?.join(', '));
             }
         } catch (error: any) {
-            throw new AppError(400, error.errors?.join(', '));
+            const { statusCode, message } = error;
+
+            throw new AppError(statusCode, message);
         }
     };
