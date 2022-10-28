@@ -14,6 +14,15 @@ export const errorMiddleware = async (
             message: error.message
         });
     }
+
+    if (error.code == '22P02') {
+        return response.status(400).json({
+            status: 'error',
+            code: error.status,
+            message: error.message
+        });
+    }
+
     console.error(error);
 
     return response.status(500).json({
