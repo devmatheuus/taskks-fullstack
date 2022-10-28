@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
-import { ISessionRequest } from '../../interfaces/sessions';
+import { ISessionRequest, ISessionResponse } from '../../interfaces/sessions';
 import sessionLoginService from '../../services/sessions/sessionsLogin.service';
-import { ISessionResponse } from '../../interfaces/sessions/index';
 
 const sessionLoginController = async (request: Request, response: Response) => {
     const { email, password }: ISessionRequest = request.loginData;

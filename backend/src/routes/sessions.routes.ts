@@ -1,5 +1,5 @@
-import { validateLogin } from '../middlewares/validators/account/validateLogin.middleware';
-import { loginSchema } from '../middlewares/validators/account/validateLogin.middleware';
+import { validateLogin } from '../middlewares/validators/session/validateLogin.middleware';
+import { loginSchema } from '../middlewares/validators/session/validateLogin.middleware';
 
 import { Router } from 'express';
 import sessionLoginController from '../controllers/session/sessionLogin.controller';

@@ -16,11 +16,11 @@ export class Task {
     @Column({ default: false })
     is_finished: boolean;
 
-    @Column()
-    finished_in?: Date;
+    @Column({ nullable: true, default: null })
+    finished_in: Date;
 
     @Column()
-    deadline: Date;
+    deadline: string;
 
     @Column()
     created_at: Date;
@@ -30,4 +30,8 @@ export class Task {
 
     @ManyToOne(() => Account, account => account.tasks)
     account: Account;
+
+    constructor() {
+        if (!this.id) this.id = uuid();
+    }
 }

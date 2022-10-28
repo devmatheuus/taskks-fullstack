@@ -1,6 +1,6 @@
-import sessionLoginService from '../../../../services/sessions/sessionsLogin.service';
 import { DataSource } from 'typeorm';
 import AppDataSource from '../../../../data-source';
+import sessionLoginService from '../../../../services/sessions/sessionsLogin.service';
 import { accountData } from '../../../mocks/account';
 import { loginData } from '../../../mocks/session';
 import createAccountService from '../../../../services/accounts/createAccount.service';

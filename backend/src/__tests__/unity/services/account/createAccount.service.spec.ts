@@ -1,8 +1,7 @@
-import createAccountService from '../../../../services/accounts/createAccount.service';
 import { DataSource } from 'typeorm';
 import AppDataSource from '../../../../data-source';
+import createAccountService from '../../../../services/accounts/createAccount.service';
 import { accountData } from '../../../mocks/account';
-import { invalidAccountData } from '../../../mocks/account/index';
 
 describe('Create an account', () => {
     let connection: DataSource;

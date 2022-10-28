@@ -16,9 +16,7 @@ export class Account {
     @Column({ default: false })
     is_admin: boolean;
 
-    @OneToMany(() => Task, task => task.account, {
-        eager: true
-    })
+    @OneToMany(() => Task, task => task.account)
     tasks: Task[];
 
     constructor() {
