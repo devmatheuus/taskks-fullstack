@@ -5,7 +5,7 @@ import app from '../../../app';
 import { accountData } from '../../mocks/account/index';
 import { loginData, invalidLoginData } from '../../mocks/session/index';
 
-describe('/login', () => {
+describe('POST - /login', () => {
     let connection: DataSource;
 
     beforeAll(async () => {

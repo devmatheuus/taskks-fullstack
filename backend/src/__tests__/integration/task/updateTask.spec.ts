@@ -9,9 +9,9 @@ import {
     updateTask,
     lateTask
 } from '../../mocks/task/index';
-import { createTask } from '../../mocks/task/index';
+import { createTask, invalidFieldToUpdate } from '../../mocks/task/index';
 
-describe('/tasks', () => {
+describe('PATCH - /tasks', () => {
     let connection: DataSource;
 
     let login: any;
@@ -73,6 +73,27 @@ describe('/tasks', () => {
 
         expect(response.status).toBe(200);
         expect(listTask.body.tasks[0].is_late).toBe(true);
+    });
+
+    test('only the description, deadline and is_finished fields can be updated', async () => {
+        const { token } = login.body;
+
+        await request(app)
+            .patch(`/tasks/${task.body.task.id}`)
+            .set('Authorization', `Bearer ${token}`)
+            .send(invalidFieldToUpdate);
+
+        const listTask = await request(app)
+            .get('/tasks')
+            .set('Authorization', `Bearer ${token}`);
+
+        expect(listTask.body.tasks[0].id).toEqual(task.body.task.id);
+        expect(listTask.body.tasks[0].finished_in).toEqual(
+            task.body.task.finished_in
+        );
+        expect(listTask.body.tasks[0].created_at).toEqual(
+            task.body.task.created_at
+        );
     });
 
     test('must mark the time that the task was completed', async () => {

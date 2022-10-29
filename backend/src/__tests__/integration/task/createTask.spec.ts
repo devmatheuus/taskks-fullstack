@@ -10,7 +10,7 @@ import {
     invalidDescription
 } from '../../mocks/task/index';
 
-describe('/tasks', () => {
+describe('POST - /tasks', () => {
     let connection: DataSource;
 
     let login: any;

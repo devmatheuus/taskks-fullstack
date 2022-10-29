@@ -6,7 +6,7 @@ const listTaskController = async (request: Request, response: Response) => {
 
     const tasks = await listTaskService(id);
 
-    return response.status(201).json({ tasks });
+    return response.json({ tasks });
 };
 
 export default listTaskController;

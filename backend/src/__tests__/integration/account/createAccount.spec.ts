@@ -4,7 +4,7 @@ import request from 'supertest';
 import app from '../../../app';
 import { accountData, invalidAccountData } from '../../mocks/account/index';
 
-describe('/accounts', () => {
+describe('POST - /accounts', () => {
     let connection: DataSource;
 
     beforeAll(async () => {

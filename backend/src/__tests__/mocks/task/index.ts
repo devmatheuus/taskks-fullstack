@@ -30,3 +30,9 @@ export const updateDescription: IUpdateTaskRequest = {
 export const lateTask: IUpdateTaskRequest = {
     deadline: '25/10/2022'
 };
+
+export const invalidFieldToUpdate = {
+    id: 'otherId',
+    finished_in: '29/10/2022',
+    created_at: 'otherDate'
+};
