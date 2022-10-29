@@ -13,7 +13,7 @@ const updateTaskController = async (request: Request, response: Response) => {
         is_finished
     });
 
-    return response.status(201).json({
+    return response.status(200).json({
         message: 'Task updated successfully.'
     });
 };

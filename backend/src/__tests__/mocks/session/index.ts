@@ -5,6 +5,11 @@ export const loginData: ISessionRequest = {
     password: 'password'
 };
 
+export const otherAccountLogin: ISessionRequest = {
+    email: 'other@email.com',
+    password: 'password'
+};
+
 export const invalidLoginData: ISessionRequest = {
     email: 'invalid@email.com',
     password: 'invalid'

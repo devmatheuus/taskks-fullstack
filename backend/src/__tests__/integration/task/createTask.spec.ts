@@ -21,7 +21,7 @@ describe('/tasks', () => {
             .catch(error => {
                 console.error('Error during initialization', error);
             });
-        const account = await request(app).post('/accounts').send(accountData);
+        await request(app).post('/accounts').send(accountData);
         login = await request(app).post('/login').send(loginData);
     });
 
