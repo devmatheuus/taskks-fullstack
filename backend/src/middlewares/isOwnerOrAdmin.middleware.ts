@@ -20,8 +20,6 @@ const isOwnerOrAdmin = async (
         relations: { account: true }
     });
 
-    console.log(task);
-
     if (!task) {
         throw new AppError(400, 'Task not found.');
     }
@@ -29,6 +27,7 @@ const isOwnerOrAdmin = async (
     const account = await accountRepository.findOneBy({ id: id });
 
     if (!account) throw new AppError(400, 'User not found.');
+
     if (task.account.id !== id && !account!.is_admin) {
         throw new AppError(401, 'Unauthorized.');
     }

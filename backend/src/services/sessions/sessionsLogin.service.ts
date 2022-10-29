@@ -19,7 +19,7 @@ const sessionLoginService = async ({ email, password }: ISessionRequest) => {
 
     const token = jwt.sign(
         {
-            isAdmin: account.is_admin
+            is_admin: account.is_admin
         },
         process.env.SECRET_KEY as string,
         {

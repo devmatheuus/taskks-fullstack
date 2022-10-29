@@ -30,8 +30,4 @@ export class Task {
 
     @ManyToOne(() => Account, account => account.tasks)
     account: Account;
-
-    constructor() {
-        if (!this.id) this.id = uuid();
-    }
 }

@@ -18,8 +18,4 @@ export class Account {
 
     @OneToMany(() => Task, task => task.account)
     tasks: Task[];
-
-    constructor() {
-        if (!this.id) this.id = uuid();
-    }
 }

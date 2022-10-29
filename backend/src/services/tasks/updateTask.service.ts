@@ -22,16 +22,15 @@ const updateTaskService = async (
         throw new AppError(400, 'This task has already been completed.');
     }
 
-    if (today > task.deadline) {
-        await taskRepository.update(task_id, {
-            is_late: true
-        });
+    if (today > task.deadline && task.is_late === false) {
+        task.is_late = true;
+    } else if (task.deadline > today && task.is_late === true) {
+        task.is_late = false;
     }
-    console.log(is_finished);
+
     let taskToUpdate;
     if (is_finished === true) {
         taskToUpdate = taskRepository.create({
-            id: task.id,
             description: description || task.description,
             deadline: deadline || task.deadline,
             is_late: task.is_late,
@@ -42,7 +41,6 @@ const updateTaskService = async (
         });
     } else {
         taskToUpdate = taskRepository.create({
-            id: task.id,
             description: description || task.description,
             deadline: deadline || task.deadline,
             is_late: task.is_late,
@@ -55,15 +53,7 @@ const updateTaskService = async (
 
     await taskRepository.update(task_id, taskToUpdate);
 
-    // const { account, ...taskWithoutAccount } = task;
-    const { password, ...accountWithoutPassword } = task.account;
-
-    const taskUpdated = {
-        ...taskToUpdate,
-        account: accountWithoutPassword
-    };
-
-    return taskUpdated;
+    return true;
 };
 
 export default updateTaskService;

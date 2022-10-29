@@ -20,7 +20,7 @@ const authTokenMiddleware = (
 
             request.accountData = {
                 id: decoded.sub,
-                is_admin: decoded.isAdm
+                is_admin: decoded.is_admin
             };
             next();
         }
