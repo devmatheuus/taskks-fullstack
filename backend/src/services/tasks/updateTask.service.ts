@@ -7,7 +7,7 @@ const updateTaskService = async (
     task_id: string,
     { deadline, description, is_finished }: IUpdateTaskRequest
 ) => {
-    const today = new Date().toLocaleDateString('pt-BR');
+    const today = new Date().getTime();
 
     const taskRepository = AppDataSource.getRepository(Task);
 
@@ -21,10 +21,20 @@ const updateTaskService = async (
     if (task.is_finished) {
         throw new AppError(400, 'This task has already been completed.');
     }
+    const formateDeadline = task.deadline.split('/');
 
-    if (today > task.deadline && task.is_late === false) {
+    const day = formateDeadline[0];
+    const month = formateDeadline[1];
+    const year = formateDeadline[2];
+
+    const timeTaskDeadline = new Date(+year, +month - 1, +day).getTime();
+
+    const isLate = today > timeTaskDeadline;
+    const itsNotLate = timeTaskDeadline >= today;
+
+    if (isLate && task.is_late === false) {
         task.is_late = true;
-    } else if (task.deadline > today && task.is_late === true) {
+    } else if (itsNotLate && task.is_late === true) {
         task.is_late = false;
     }
 

@@ -28,7 +28,13 @@ export const updateDescription: IUpdateTaskRequest = {
 };
 
 export const lateTask: IUpdateTaskRequest = {
+    description: 'IS LATE',
     deadline: '25/10/2022'
+};
+
+export const istNotLate: IUpdateTaskRequest = {
+    description: 'ITS NOT LATE',
+    deadline: '20/10/2042'
 };
 
 export const invalidFieldToUpdate = {

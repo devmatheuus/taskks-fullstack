@@ -4,7 +4,7 @@ import request from 'supertest';
 import app from '../../../app';
 import { accountData, otherAccountData } from '../../mocks/account/index';
 import { loginData, otherAccountLogin } from '../../mocks/session/index';
-import { createTask } from '../../mocks/task/index';
+import { createTask, istNotLate, lateTask } from '../../mocks/task/index';
 
 describe('GET /tasks', () => {
     let connection: DataSource;
@@ -71,5 +71,31 @@ describe('GET /tasks', () => {
 
         expect(response.status).toBe(401);
         expect(response.body).toHaveProperty('message');
+    });
+
+    test('the task creator should be able to view them', async () => {
+        const { token } = login.body;
+
+        const task = await request(app)
+            .post('/tasks')
+            .set('Authorization', `Bearer ${token}`)
+            .send(createTask);
+
+        await request(app)
+            .patch(`/tasks/${task.body.task.id}`)
+            .set('Authorization', `Bearer ${token}`)
+            .send(lateTask);
+
+        await request(app)
+            .patch(`/tasks/${task.body.task.id}`)
+            .set('Authorization', `Bearer ${token}`)
+            .send(istNotLate);
+
+        const listTask = await request(app)
+            .get('/tasks')
+            .set('Authorization', `Bearer ${token}`);
+
+        expect(listTask.status).toBe(200);
+        expect(listTask.body.tasks[1].is_late).toBe(false);
     });
 });

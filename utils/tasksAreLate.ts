@@ -1,25 +1,24 @@
 import AppDataSource from '../backend/src/data-source';
 import { Task } from '../backend/src/entities/task.entity';
-import { Account } from '../backend/src/entities/account.entity';
-import { AppError } from '../backend/src/errors/AppError';
 
 const tasksAreLate = async (account_id: string) => {
-    const today = new Date().toLocaleDateString('pt-BR');
+    const today = new Date().getTime();
 
     const taskRepository = AppDataSource.getRepository(Task);
-    const accountRepository = AppDataSource.getRepository(Account);
-
-    const account = await accountRepository.findOneBy({ id: account_id });
-
-    if (!account) {
-        throw new AppError(404, 'Account not found.');
-    }
 
     const tasks = await taskRepository.find({ relations: { account: true } });
 
     tasks.map(async task => {
-        const isLate = today > task.deadline;
-        const itsNotLate = task.deadline >= today;
+        const formateDeadline = task.deadline.split('/');
+
+        const day = formateDeadline[0];
+        const month = formateDeadline[1];
+        const year = formateDeadline[2];
+
+        const timeTaskDeadline = new Date(+year, +month - 1, +day).getTime();
+
+        const isLate = today > timeTaskDeadline;
+        const itsNotLate = timeTaskDeadline >= today;
 
         if (isLate && task.is_late === false) {
             task.is_late = true;
