@@ -5,11 +5,10 @@ const listTaskAdminController = async (
     request: Request,
     response: Response
 ) => {
-    const { id } = request.accountData;
     const late = request.query.late as string;
     const page: number = parseInt(request.query.page as string) || 1;
 
-    const tasks = await listTasksAdminService(page, late, id);
+    const tasks = await listTasksAdminService(page, late);
 
     response.json({ tasks });
 };

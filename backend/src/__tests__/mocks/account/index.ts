@@ -5,6 +5,11 @@ export const accountData: IAccountRequest = {
     password: '1234'
 };
 
+export const otherAccountData: IAccountRequest = {
+    email: 'other@email.com',
+    password: '1234'
+};
+
 export const invalidAccountData: IAccountRequest = {
     email: 'invalidlengthinvalidlengthinvalidlengthinvalidlength@email.com',
     password: '1234'

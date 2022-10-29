@@ -18,9 +18,12 @@ const tasksAreLate = async (account_id: string) => {
     const tasks = await taskRepository.find({ relations: { account: true } });
 
     tasks.map(async task => {
-        if (today > task.deadline && task.is_late === false) {
+        const isLate = today > task.deadline;
+        const itsNotLate = task.deadline >= today;
+
+        if (isLate && task.is_late === false) {
             task.is_late = true;
-        } else if (task.deadline >= today && task.is_late === true) {
+        } else if (itsNotLate && task.is_late === true) {
             task.is_late = false;
         }
     });

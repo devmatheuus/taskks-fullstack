@@ -1,13 +1,8 @@
 import AppDataSource from '../../data-source';
 import { Task } from '../../entities/task.entity';
 import { AppError } from '../../errors/AppError';
-import { Account } from '../../entities/account.entity';
 
-const listTasksAdminService = async (
-    page: number,
-    late: string,
-    account_id: string
-) => {
+const listTasksAdminService = async (page: number, late: string) => {
     const taskRepository = AppDataSource.getRepository(Task);
 
     const builder = taskRepository
