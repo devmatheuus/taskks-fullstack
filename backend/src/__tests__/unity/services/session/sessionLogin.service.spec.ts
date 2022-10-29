@@ -30,6 +30,7 @@ describe('Login', () => {
                 token: response.token
             })
         );
-        expect(response.token).toHaveLength(209);
+
+        expect(response.token).toHaveLength(211);
     });
 });

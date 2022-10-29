@@ -7,7 +7,7 @@ const isAdminMiddleware = (
     next: NextFunction
 ) => {
     const isAdmin = request.accountData.is_admin;
-    console.log(request.accountData);
+
     if (!isAdmin) throw new AppError(401, 'Unauthorized');
 
     next();
