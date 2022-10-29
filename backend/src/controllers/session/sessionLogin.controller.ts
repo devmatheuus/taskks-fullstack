@@ -10,7 +10,7 @@ const sessionLoginController = async (request: Request, response: Response) => {
         password
     });
 
-    return response.status(201).json(token);
+    return response.json(token);
 };
 
 export default sessionLoginController;

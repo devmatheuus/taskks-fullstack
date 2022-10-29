@@ -11,11 +11,11 @@ const sessionLoginService = async ({ email, password }: ISessionRequest) => {
 
     const account = await accountRepository.findOneBy({ email });
 
-    if (!account) throw new AppError(403, 'Incorrect email or password');
+    if (!account) throw new AppError(400, 'Incorrect email or password');
 
     const matchPassword = await compare(password, account.password);
 
-    if (!matchPassword) throw new AppError(403, 'Incorrect email or password');
+    if (!matchPassword) throw new AppError(400, 'Incorrect email or password');
 
     const token = jwt.sign(
         {

@@ -47,4 +47,14 @@ describe('/accounts', () => {
         expect(response.status).toEqual(400);
         expect(response.body).toHaveProperty('message');
     });
+
+    test('POST /accounts - email and password fields must be mandatory', async () => {
+        const response = await request(app).post('/accounts').send({});
+
+        expect(response.status).toEqual(400);
+        expect(response.body).toHaveProperty('message');
+        expect(response.body.message).toEqual(
+            'email is a required field, password is a required field'
+        );
+    });
 });
