@@ -8,7 +8,7 @@ import { Router } from 'express';
 import authTokenMiddleware from '../middlewares/authToken.middleware';
 import createTaskController from '../controllers/task/createTask.controller';
 import updateTaskController from '../controllers/task/updateTask.controller';
-import isOwnerOrAdmin from '../middlewares/isOwnerOrAdmin.middleware';
+import isOwner from '../middlewares/isOwner.middleware';
 import listTaskController from '../controllers/task/listTasks.controller';
 import listTaskAdminController from '../controllers/task/listTasksAdmin.controller';
 import isAdminMiddleware from '../middlewares/isAdmin.middleware';
@@ -26,7 +26,7 @@ export const taskRoutes = () => {
     routes.patch(
         '/:task_id',
         authTokenMiddleware,
-        isOwnerOrAdmin,
+        isOwner,
         validateUpdateTask(updateTaskSchema),
         updateTaskController
     );

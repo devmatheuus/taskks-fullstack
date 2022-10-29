@@ -2,9 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import { AppError } from '../errors/AppError';
 import AppDataSource from '../data-source';
 import { Task } from '../entities/task.entity';
-import { Account } from '../entities/account.entity';
 
-const isOwnerOrAdmin = async (
+const isOwner = async (
     request: Request,
     response: Response,
     next: NextFunction
@@ -13,7 +12,6 @@ const isOwnerOrAdmin = async (
     const { id } = request.accountData;
 
     const taskRepository = AppDataSource.getRepository(Task);
-    const accountRepository = AppDataSource.getRepository(Account);
 
     const task = await taskRepository.findOne({
         where: { id: task_id },
@@ -24,15 +22,11 @@ const isOwnerOrAdmin = async (
         throw new AppError(400, 'Task not found.');
     }
 
-    const account = await accountRepository.findOneBy({ id: id });
-
-    if (!account) throw new AppError(400, 'User not found.');
-
-    if (task.account.id !== id && !account!.is_admin) {
+    if (task.account.id !== id) {
         throw new AppError(401, 'Unauthorized.');
     }
 
     next();
 };
 
-export default isOwnerOrAdmin;
+export default isOwner;
