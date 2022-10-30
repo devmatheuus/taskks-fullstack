@@ -2,7 +2,8 @@ import * as yup from 'yup';
 import { ICreateTaskRequest } from '../../../interfaces/task';
 import { AppError } from '../../../errors/AppError';
 import { Request, Response, NextFunction } from 'express';
-import { dateValidation } from '../../../../../utils/dateRegexValidation';
+
+import { dateValidation } from '../../../utils/dateRegexValidation';
 
 export const createTaskSchema: yup.SchemaOf<ICreateTaskRequest> = yup
     .object()

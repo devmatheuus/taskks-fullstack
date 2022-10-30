@@ -2,7 +2,7 @@ import * as yup from 'yup';
 import { IUpdateTaskRequest } from '../../../interfaces/task';
 import { AppError } from '../../../errors/AppError';
 import { Request, Response, NextFunction } from 'express';
-import { dateValidation } from '../../../../../utils/dateRegexValidation';
+import { dateValidation } from '../../../utils/dateRegexValidation';
 
 export const updateTaskSchema: yup.SchemaOf<IUpdateTaskRequest> = yup
     .object()
