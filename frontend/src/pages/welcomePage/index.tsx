@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom';
 import image from '../../assets/welcomePage.svg';
 import Button from '../../components/Button/style';
 import { Container } from './style';
+import Logo from '../../components/Logo';
 
 const WelcomePage = () => {
     return (
         <Container>
             <div>
                 <p>Bem vindo ao</p>
-                <h1>TASKK´S</h1>
+                <Logo />
             </div>
             <div>
                 <img src={image} alt="Welcome Image" />

@@ -4,6 +4,7 @@ import SignInPage from '../pages/signInPage';
 import WelcomePage from '../pages/welcomePage';
 import GlobalStyle from '../styles/global';
 import SignUpPage from '../pages/singUpPage/index';
+import Dashboard from '../pages/dashboard/index';
 
 const Routes = () => {
     return (
@@ -18,6 +19,9 @@ const Routes = () => {
                 </Route>
                 <Route exact path="/signup">
                     <SignUpPage />
+                </Route>
+                <Route exact path="/dashboard">
+                    <Dashboard />
                 </Route>
             </Switch>
         </>

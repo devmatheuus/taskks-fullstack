@@ -21,11 +21,6 @@ export const Container = styled.div`
             font-weight: 500;
             color: var(--semi-black);
         }
-
-        h1 {
-            font-size: 5rem;
-            font-weight: 600;
-        }
     }
 
     div:nth-child(2) {
