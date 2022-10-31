@@ -7,10 +7,11 @@
     "license": "MIT",
     "scripts": {
         "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
-        "build": "tsc",
         "typeorm": "typeorm-ts-node-commonjs",
         "test": "NODE_ENV=test jest",
-        "coverage": "jest --colors --coverage"
+        "coverage": "jest --colors --coverage",
+        "build": "tsc",
+        "start": "node dist/src/server.js"
     },
     "dependencies": {
         "@types/yup": "^0.32.0",
