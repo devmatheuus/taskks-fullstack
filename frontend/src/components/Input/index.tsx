@@ -3,13 +3,20 @@ import { InputHTMLAttributes } from 'react';
 
 interface IComponentProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string;
+    register: any;
 }
 
-const Input = ({ placeholder, label, ...rest }: IComponentProps) => {
+const Input = ({
+    placeholder,
+    label,
+    register,
+    name,
+    ...rest
+}: IComponentProps) => {
     return (
         <InputContainer>
             {label && <label>{label}</label>}
-            <input placeholder={placeholder} {...rest} />
+            <input placeholder={placeholder} {...register(name)} {...rest} />
         </InputContainer>
     );
 };

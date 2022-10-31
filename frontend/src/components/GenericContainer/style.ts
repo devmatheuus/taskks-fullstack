@@ -15,7 +15,7 @@ export const GenericContainer = styled.div`
     p {
         font-size: 2.5rem;
         font-weight: 600;
-        color: var(--semi-black);
+        color: var(--dark-gray);
     }
 
     div {

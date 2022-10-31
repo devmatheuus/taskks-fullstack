@@ -4,18 +4,60 @@ import Button from '../../components/Button/style';
 import { GenericContainer } from '../../components/GenericContainer/style';
 import Input from '../../components/Input';
 
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { UseAuth } from '../../Providers/auth/index';
+import { Span } from '../../components/Span/style';
+import { formSchema } from '../../schemas/session/index';
+
+interface IUserData {
+    email: string;
+    password: string;
+}
+
 const SignUpPage = () => {
+    const { signUp } = UseAuth();
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm<IUserData>({
+        resolver: yupResolver(formSchema)
+    });
+
+    const onSubmitFunction = async (data: IUserData) => {
+        signUp(data);
+    };
+
     return (
         <GenericContainer>
-            <p>Vamos juntos nessa!</p>
+            <p>Cadastre-se e vamos juntos nessa!</p>
 
             <div>
                 <img src={image} alt="SignIn Image" />
             </div>
 
-            <form>
-                <Input placeholder="Seu melhor email" label="Email" />
-                <Input placeholder="Uma senha bem forte" label="Senha" />
+            <form onSubmit={handleSubmit(onSubmitFunction)}>
+                <Input
+                    placeholder="Seu melhor email"
+                    label="Email"
+                    register={register}
+                    name="email"
+                />
+                {errors.email?.message && <Span>{errors.email?.message}</Span>}
+
+                <Input
+                    placeholder="Uma senha bem forte"
+                    label="Senha"
+                    type="password"
+                    register={register}
+                    name="password"
+                />
+                {errors.password?.message && (
+                    <Span>{errors.password?.message}</Span>
+                )}
+
                 <Button type="submit">Cadastrar</Button>
             </form>
 
