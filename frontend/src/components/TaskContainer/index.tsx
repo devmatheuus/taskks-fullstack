@@ -7,7 +7,11 @@ import { AiOutlineCheck } from 'react-icons/ai';
 import { FiEdit2 } from 'react-icons/fi';
 import Task from '../Task/index';
 
+import { UseDash } from '../../Providers/dashboard';
+
 const TaskContainer = () => {
+    const { setShowModal } = UseDash();
+
     return (
         <StyledTaskContainer>
             <div className="container">
@@ -26,7 +30,9 @@ const TaskContainer = () => {
                 </ul>
             </div>
 
-            <Button>Adicionar nova tarefa</Button>
+            <Button onClick={() => setShowModal(true)}>
+                Adicionar nova tarefa
+            </Button>
         </StyledTaskContainer>
     );
 };

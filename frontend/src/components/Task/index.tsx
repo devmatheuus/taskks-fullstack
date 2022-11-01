@@ -8,34 +8,37 @@ import { StyledTask } from './style';
 const Task = () => {
     return (
         <StyledTask>
+            <div className="flag"></div>
             <div className="container-button">
                 <Button>
-                    <AiOutlineCheck color="var(--blue)" size={25} />
+                    <AiOutlineCheck
+                        color="var(--blue)"
+                        size={25}
+                        title="Concluir tarefa"
+                    />
                 </Button>
             </div>
 
             <div className="container-task">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Dolor doloribus reiciendis aperiam aut autem provident
-                    praesentium voluptatibus? Illo nihil ratione laudantium
-                    consequuntur quidem fugit adipisci. Deserunt alias in natus
-                    ipsum.
-                </p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             </div>
 
             <div className="container-infos">
                 <span>
-                    <RiTodoLine /> 22/10/2002
+                    <RiTodoLine size={20} title="Criado em" /> 22/10/2002
                 </span>
                 <span>
-                    <BiTimeFive /> 30/05/2009
+                    <BiTimeFive size={20} title="Prazo" /> 30/05/2009
                 </span>
             </div>
 
             <div className="container-edit">
                 <Button>
-                    <FiEdit2 color="var(--blue)" size={25} />
+                    <FiEdit2
+                        color="var(--blue)"
+                        title="Editar tarefa"
+                        size={25}
+                    />
                 </Button>
             </div>
         </StyledTask>

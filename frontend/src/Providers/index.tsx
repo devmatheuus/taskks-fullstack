@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { AuthProvider } from './auth';
+import { DashProvider } from './dashboard/index';
 
 interface IProviderProps {
     children: ReactNode;
@@ -8,7 +9,9 @@ interface IProviderProps {
 const Providers = ({ children }: IProviderProps) => {
     return (
         <>
-            <AuthProvider>{children}</AuthProvider>
+            <DashProvider>
+                <AuthProvider>{children}</AuthProvider>
+            </DashProvider>
         </>
     );
 };
