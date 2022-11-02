@@ -85,6 +85,8 @@ export const StyledTask = styled.li`
         border-radius: 8px;
 
         max-height: 250px;
+        width: 82%;
+        align-self: center;
 
         .flag {
             display: flex;

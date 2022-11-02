@@ -4,8 +4,19 @@ import { RiTodoLine } from 'react-icons/ri';
 import { BiTimeFive } from 'react-icons/bi';
 import { FiEdit2 } from 'react-icons/fi';
 import { StyledTask } from './style';
+import { ITaskResponse } from '../../interfaces/tasks/index';
 
-const Task = () => {
+interface teste {
+    task: {
+        description: string;
+        created_at: Date;
+        deadline: string;
+    };
+}
+
+const Task = ({ task }: teste) => {
+    const createdAt = new Date(task.created_at).toLocaleDateString('pt-BR');
+
     return (
         <StyledTask>
             <div className="flag"></div>
@@ -20,15 +31,15 @@ const Task = () => {
             </div>
 
             <div className="container-task">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <p>{task.description}</p>
             </div>
 
             <div className="container-infos">
                 <span>
-                    <RiTodoLine size={20} title="Criado em" /> 22/10/2002
+                    <RiTodoLine size={20} title="Criado em" /> {createdAt}
                 </span>
                 <span>
-                    <BiTimeFive size={20} title="Prazo" /> 30/05/2009
+                    <BiTimeFive size={20} title="Prazo" /> {task.deadline}
                 </span>
             </div>
 

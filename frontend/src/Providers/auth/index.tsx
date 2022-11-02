@@ -1,5 +1,11 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { useHistory } from 'react-router-dom';
+import {
+    createContext,
+    useContext,
+    useState,
+    ReactNode,
+    useEffect
+} from 'react';
+import { useHistory, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import api from '../../services/api';
@@ -17,6 +23,9 @@ interface IAuthProvider {
     token: string;
     signIn: (userData: IUserData) => void;
     signUp: (userData: IUserData) => void;
+    authenticated: boolean;
+    setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+    logout: () => void;
 }
 
 const AuthContext = createContext<IAuthProvider>({} as IAuthProvider);
@@ -28,11 +37,26 @@ export const UseAuth = () => {
 };
 
 export const AuthProvider = ({ children }: IAuthProviderProps) => {
+    const [authenticated, setAuthenticated] = useState(false);
     const history = useHistory();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+
+        if (token) {
+            return setAuthenticated(true);
+        }
+    }, [authenticated]);
 
     const [token, setToken] = useState(
         () => (localStorage.getItem('token') as string) || ''
     );
+
+    const logout = () => {
+        setAuthenticated(false);
+        <Redirect to="/" />;
+        localStorage.clear();
+    };
 
     const signIn = (userData: IUserData) => {
         api.post('/login', userData)
@@ -42,9 +66,10 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
                 setToken(response.data.token);
 
                 toast.success('Login efetuado com sucesso!');
+                setAuthenticated(true);
 
                 setTimeout(() => {
-                    history.push('/');
+                    history.push('/dashboard');
                 }, 1000);
             })
             .catch(error => {
@@ -67,7 +92,16 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     };
 
     return (
-        <AuthContext.Provider value={{ token, signIn, signUp }}>
+        <AuthContext.Provider
+            value={{
+                token,
+                signIn,
+                signUp,
+                authenticated,
+                setAuthenticated,
+                logout
+            }}
+        >
             {children}
         </AuthContext.Provider>
     );

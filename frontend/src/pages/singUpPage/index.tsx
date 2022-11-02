@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import image from '../../assets/signUp.svg';
 import Button from '../../components/Button/style';
 import { GenericContainer } from '../../components/GenericContainer/style';
@@ -16,7 +16,11 @@ interface IUserData {
 }
 
 const SignUpPage = () => {
-    const { signUp } = UseAuth();
+    const { signUp, authenticated } = UseAuth();
+
+    if (authenticated) {
+        return <Redirect to="/dashboard" />;
+    }
 
     const {
         register,

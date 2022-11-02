@@ -1,16 +1,23 @@
 import { StyledTaskContainer } from './style';
 import Button from '../Button/style';
 
-import { RiTodoLine } from 'react-icons/ri';
-import { BiTimeFive } from 'react-icons/bi';
-import { AiOutlineCheck } from 'react-icons/ai';
-import { FiEdit2 } from 'react-icons/fi';
 import Task from '../Task/index';
 
 import { UseDash } from '../../Providers/dashboard';
+import { useEffect } from 'react';
+import { UseAuth } from '../../Providers/auth/index';
 
 const TaskContainer = () => {
-    const { setShowModal } = UseDash();
+    const { setShowModal, loadTasks, tasks } = UseDash();
+    const { token } = UseAuth();
+
+    useEffect(() => {
+        if (token) {
+            loadTasks(token);
+        }
+    }, []);
+
+    console.log(tasks);
 
     return (
         <StyledTaskContainer>
@@ -18,15 +25,8 @@ const TaskContainer = () => {
                 <h1>Tarefas</h1>
 
                 <ul>
-                    <Task />
-                    <Task />
-                    <Task />
-                    <Task />
-                    <Task />
-                    <Task />
-                    <Task />
-                    <Task />
-                    <Task />
+                    {tasks.length > 0 &&
+                        tasks.map(task => <Task task={task} key={task.id} />)}
                 </ul>
             </div>
 

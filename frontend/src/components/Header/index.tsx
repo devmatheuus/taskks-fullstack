@@ -2,16 +2,20 @@ import Button from '../Button/style';
 import Logo from '../Logo';
 import { ContainerHeader } from './style';
 
-import { UseDash } from '../../Providers/dashboard';
+import { UseAuth } from '../../Providers/auth/index';
 
 const Header = () => {
-    const { logout } = UseDash();
+    const { logout } = UseAuth();
+
+    const handleClick = () => {
+        logout();
+    };
 
     return (
         <ContainerHeader>
             <div>
                 <Logo />
-                <Button onClick={() => logout()}>Sair</Button>
+                <Button onClick={() => handleClick()}>Sair</Button>
             </div>
         </ContainerHeader>
     );

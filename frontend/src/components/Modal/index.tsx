@@ -10,6 +10,9 @@ import { ContainerModal } from './style';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 import { UseDash } from '../../Providers/dashboard';
+import { ICreateTask } from '../../interfaces/tasks/index';
+import { createTaskSchema } from '../../schemas/tasks/index';
+import { UseAuth } from '../../Providers/auth/index';
 
 interface IModalProps {
     text: string;
@@ -18,29 +21,25 @@ interface IModalProps {
     inputDeadlineText: string;
 }
 
-interface ITaskRequest {
-    description: string;
-    deadline: string;
-}
-
 const Modal = ({
     text,
     textButton,
     inputDeadlineText,
     inputDescriptionText
 }: IModalProps) => {
-    const { setShowModal } = UseDash();
+    const { setShowModal, createTask } = UseDash();
+    const { token } = UseAuth();
 
     const {
         register,
         handleSubmit,
         formState: { errors }
-    } = useForm<ITaskRequest>({
-        resolver: yupResolver(formSchema)
+    } = useForm<ICreateTask>({
+        resolver: yupResolver(createTaskSchema)
     });
 
-    const onSubmitFunction = async (data: ITaskRequest) => {
-        console.log(data);
+    const onSubmitFunction = async (task: ICreateTask) => {
+        createTask(task, token);
     };
 
     return (
@@ -53,6 +52,7 @@ const Modal = ({
                         <AiOutlineCloseCircle size={25} color="var(--blue)" />
                     </Button>
                 </div>
+
                 <form onSubmit={handleSubmit(onSubmitFunction)}>
                     <Input
                         placeholder={inputDescriptionText}
@@ -74,7 +74,7 @@ const Modal = ({
                         <Span>{errors.deadline?.message}</Span>
                     )}
 
-                    <Button>{textButton}</Button>
+                    <Button type="submit">{textButton}</Button>
                 </form>
             </div>
         </ContainerModal>

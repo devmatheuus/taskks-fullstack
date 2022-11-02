@@ -3,7 +3,7 @@ import Button from '../../components/Button/style';
 import { GenericContainer } from '../../components/GenericContainer/style';
 import Input from '../../components/Input';
 
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -17,7 +17,11 @@ interface IUserData {
 }
 
 const SignInPage = () => {
-    const { signIn } = UseAuth();
+    const { signIn, authenticated } = UseAuth();
+
+    if (authenticated) {
+        return <Redirect to="/dashboard" />;
+    }
 
     const {
         register,
@@ -42,7 +46,7 @@ const SignInPage = () => {
             <form onSubmit={handleSubmit(onSubmitFunction)}>
                 <Input
                     placeholder="Insira seu email"
-                    label="Senha"
+                    label="Email"
                     register={register}
                     name="email"
                 />
