@@ -7,6 +7,8 @@ export const StyledTask = styled.li`
 
     margin: 1px 0px;
 
+    background: red;
+
     .flag {
         display: none;
     }

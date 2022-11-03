@@ -10,6 +10,7 @@ import {
 import { toast } from 'react-toastify';
 
 import api from '../../services/api';
+import { useHistory } from 'react-router-dom';
 import {
     ICreateTask,
     ITaskResponse,
@@ -50,6 +51,8 @@ export const UseDash = () => {
 };
 
 export const DashProvider = ({ children }: IDashProviderProps) => {
+    const history = useHistory();
+
     const [showModal, setShowModal] = useState(false);
 
     const [showModalUpdate, setShowModalUpdate] = useState(false);
@@ -65,9 +68,13 @@ export const DashProvider = ({ children }: IDashProviderProps) => {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(response => {
-            setTasks(response.data.tasks);
-        });
+        })
+            .then(response => {
+                setTasks(response.data.tasks);
+            })
+            .catch(() => {
+                history.push('/');
+            });
     };
 
     const createTask = (task: ICreateTask, token: string) => {

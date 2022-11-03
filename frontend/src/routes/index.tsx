@@ -5,6 +5,7 @@ import WelcomePage from '../pages/welcomePage';
 import GlobalStyle from '../styles/global';
 import SignUpPage from '../pages/singUpPage/index';
 import Dashboard from '../pages/dashboard/index';
+import AdminDashboard from '../pages/adminDashboard/index';
 
 const Routes = () => {
     return (
@@ -22,6 +23,9 @@ const Routes = () => {
                 </Route>
                 <Route exact path="/dashboard">
                     <Dashboard />
+                </Route>
+                <Route exact path="/dashboard/admin">
+                    <AdminDashboard />
                 </Route>
             </Switch>
         </>

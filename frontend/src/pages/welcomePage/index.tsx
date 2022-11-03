@@ -4,15 +4,7 @@ import Button from '../../components/Button/style';
 import { Container } from './style';
 import Logo from '../../components/Logo';
 
-import { UseAuth } from '../../Providers/auth';
-
 const WelcomePage = () => {
-    const { authenticated } = UseAuth();
-
-    if (authenticated) {
-        return <Redirect to="/dashboard" />;
-    }
-
     return (
         <Container>
             <div>
