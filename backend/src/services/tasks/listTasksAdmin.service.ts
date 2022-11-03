@@ -50,12 +50,7 @@ const listTasksAdminService = async (page: number, late: string) => {
         return data;
     });
 
-    if (
-        nextPage >= total ||
-        tasks.length === 1 ||
-        tasks.length === 2 ||
-        !tasks.length
-    ) {
+    if (nextPage >= total || tasks.length <= 2) {
         nextPage = null;
         next = null;
     }
