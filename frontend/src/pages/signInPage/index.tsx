@@ -1,6 +1,6 @@
 import image from '../../assets/signIn.svg';
 import Button from '../../components/Button/style';
-import { GenericContainer } from '../../components/GenericContainer/style';
+import { GenericContainer } from '../../components/GenericContainerStyle/style';
 import Input from '../../components/Input';
 
 import { Link, Redirect } from 'react-router-dom';

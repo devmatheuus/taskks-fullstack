@@ -2,12 +2,23 @@ import * as yup from 'yup';
 import { dateValidation } from '../../utils/dateRegexValidation';
 
 export const createTaskSchema = yup.object().shape({
-    description: yup.string().required('Este campo é obrigatório'),
+    description: yup
+        .string()
+        .required('Este campo é obrigatório')
+        .min(5, 'Este campo deve ter pelo menos 5 caracteres'),
     deadline: yup
         .string()
         .required('Este campo é obrigatório')
-        .matches(
-            dateValidation,
-            'O prazo deve seguir o seguinte formato: dd/MM/yyyy'
-        )
+        .matches(dateValidation, 'Insira um data válida')
+});
+
+export const updateTaskSchema = yup.object().shape({
+    description: yup
+        .string()
+        .min(5, 'Este campo deve ter pelo menos 5 caracteres'),
+    deadline: yup.string().matches(dateValidation, 'Insira um data válida')
+});
+
+export const finishTaskSchema = yup.object().shape({
+    is_finished: yup.boolean().required()
 });

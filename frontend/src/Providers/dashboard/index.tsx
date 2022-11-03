@@ -7,12 +7,14 @@ import {
     SetStateAction
 } from 'react';
 
-import { useHistory, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import api from '../../services/api';
-import { useEffect } from 'react';
-import { ICreateTask, ITaskResponse } from '../../interfaces/tasks/index';
+import {
+    ICreateTask,
+    ITaskResponse,
+    IUpdateTask
+} from '../../interfaces/tasks/index';
 
 interface IDashProviderProps {
     children: ReactNode;
@@ -21,9 +23,22 @@ interface IDashProviderProps {
 interface IDashProvider {
     showModal: boolean;
     setShowModal: Dispatch<SetStateAction<boolean>>;
+
+    showModalUpdate: boolean;
+    setShowModalUpdate: Dispatch<SetStateAction<boolean>>;
+
+    showModalFinishTask: boolean;
+    setShowModalFinishTask: Dispatch<SetStateAction<boolean>>;
+
     tasks: ITaskResponse[];
+
+    currentTaskId: string;
+    setCurrentTaskId: Dispatch<SetStateAction<string>>;
+
     loadTasks: (token: string) => void;
     createTask: (task: ICreateTask, token: string) => void;
+    updateTask: (task: IUpdateTask, token: string, taskId: string) => void;
+    finishTask: (isFinished: boolean, token: string, taskId: string) => void;
 }
 
 const DashContext = createContext<IDashProvider>({} as IDashProvider);
@@ -36,7 +51,14 @@ export const UseDash = () => {
 
 export const DashProvider = ({ children }: IDashProviderProps) => {
     const [showModal, setShowModal] = useState(false);
+
+    const [showModalUpdate, setShowModalUpdate] = useState(false);
+
+    const [showModalFinishTask, setShowModalFinishTask] = useState(false);
+
     const [tasks, setTasks] = useState(Array<ITaskResponse>);
+
+    const [currentTaskId, setCurrentTaskId] = useState('');
 
     const loadTasks = (token: string) => {
         api.get('/tasks', {
@@ -66,9 +88,69 @@ export const DashProvider = ({ children }: IDashProviderProps) => {
             });
     };
 
+    const updateTask = (task: IUpdateTask, token: string, taskId: string) => {
+        toast.loading('Criando tarefa...');
+        api.patch(`/tasks/${taskId}`, task, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(response => {
+                loadTasks(token);
+                toast.dismiss();
+                toast.success('Tarefa editada com sucesso');
+            })
+            .catch(() => {
+                toast.dismiss();
+                toast.error('Revise os campos');
+            })
+            .finally(() => {
+                setShowModalUpdate(false);
+            });
+    };
+
+    const finishTask = (isFinished: boolean, token: string, taskId: string) => {
+        toast.loading('Finalizando tarefa...');
+        api.patch(
+            `/tasks/${taskId}`,
+            { is_finished: isFinished },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        )
+            .then(response => {
+                loadTasks(token);
+                toast.dismiss();
+                toast.success('Tarefa finalizada com sucesso');
+            })
+            .catch(() => {
+                toast.dismiss();
+                toast.error('Algo de errado aconteceu');
+            })
+            .finally(() => {
+                setShowModalFinishTask(false);
+            });
+    };
+
     return (
         <DashContext.Provider
-            value={{ setShowModal, showModal, loadTasks, tasks, createTask }}
+            value={{
+                setShowModal,
+                showModal,
+                loadTasks,
+                tasks,
+                createTask,
+                setShowModalUpdate,
+                showModalUpdate,
+                updateTask,
+                currentTaskId,
+                setCurrentTaskId,
+                finishTask,
+                setShowModalFinishTask,
+                showModalFinishTask
+            }}
         >
             {children}
         </DashContext.Provider>

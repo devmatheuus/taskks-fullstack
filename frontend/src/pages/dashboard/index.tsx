@@ -1,31 +1,26 @@
 import Header from '../../components/Header';
-import Modal from '../../components/Modal';
 import TaskContainer from '../../components/TaskContainer';
 
 import { UseDash } from '../../Providers/dashboard';
 import { UseAuth } from '../../Providers/auth';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import ModalCreate from '../../components/ModalCreate';
+import ModalUpdate from '../../components/ModalUpdate/index';
+import ModalFinishTask from '../../components/ModalFinishTask/index';
 
 const Dashboard = () => {
-    const history = useHistory();
-
     const { authenticated } = UseAuth();
-    const { showModal } = UseDash();
+    const { showModal, showModalUpdate, showModalFinishTask } = UseDash();
 
     if (!authenticated) {
-        history.push('/signin');
+        return <Redirect to="/" />;
     }
 
     return (
         <>
-            {showModal && (
-                <Modal
-                    text="Criar tarefa"
-                    inputDeadlineText="Qual sera o prazo?"
-                    inputDescriptionText="Anote aqui sua tarefa?"
-                    textButton="Criar"
-                />
-            )}
+            {showModalFinishTask && <ModalFinishTask />}
+            {showModal && <ModalCreate />}
+            {showModalUpdate && <ModalUpdate />}
             <Header />
             <TaskContainer />
         </>

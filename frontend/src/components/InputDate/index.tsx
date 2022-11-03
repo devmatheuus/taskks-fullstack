@@ -1,4 +1,4 @@
-import InputContainer from './style';
+import InputContainer from '../Input/style';
 import { InputHTMLAttributes } from 'react';
 import InputMask from 'react-input-mask';
 
@@ -7,7 +7,7 @@ interface IComponentProps extends InputHTMLAttributes<HTMLInputElement> {
     register: any;
 }
 
-const Input = ({
+const InputDate = ({
     placeholder,
     label,
     register,
@@ -17,9 +17,14 @@ const Input = ({
     return (
         <InputContainer>
             {label && <label>{label}</label>}
-            <input placeholder={placeholder} {...register(name)} {...rest} />
+            <InputMask
+                mask="99/99/9999"
+                placeholder={placeholder}
+                {...register(name)}
+                {...rest}
+            />
         </InputContainer>
     );
 };
 
-export default Input;
+export default InputDate;

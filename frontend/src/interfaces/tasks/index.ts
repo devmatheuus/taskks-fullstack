@@ -21,3 +21,12 @@ export interface ICreateTask {
     description: string;
     deadline: string;
 }
+
+export interface IUpdateTask {
+    description?: string;
+    deadline?: string;
+}
+
+export interface IFinishTask {
+    is_finished: boolean;
+}

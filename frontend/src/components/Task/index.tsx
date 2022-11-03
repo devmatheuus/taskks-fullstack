@@ -4,26 +4,55 @@ import { RiTodoLine } from 'react-icons/ri';
 import { BiTimeFive } from 'react-icons/bi';
 import { FiEdit2 } from 'react-icons/fi';
 import { StyledTask } from './style';
-import { ITaskResponse } from '../../interfaces/tasks/index';
+import { UseDash } from '../../Providers/dashboard/index';
 
-interface teste {
+interface IRenderTask {
     task: {
         description: string;
         created_at: Date;
         deadline: string;
+        id: string;
+        is_finished: boolean;
     };
 }
 
-const Task = ({ task }: teste) => {
+const Task = ({ task }: IRenderTask) => {
+    const { setShowModalUpdate, setCurrentTaskId, setShowModalFinishTask } =
+        UseDash();
+
     const createdAt = new Date(task.created_at).toLocaleDateString('pt-BR');
 
+    const taskId = task.id;
+    const isFinished = task.is_finished;
+
+    const styledFinishedTask = isFinished ? 'var(--white)' : 'var(--blue)';
+
+    const openModalEdit = () => {
+        setShowModalUpdate(true);
+
+        setCurrentTaskId(taskId);
+    };
+
+    const openModalFinishTask = () => {
+        setShowModalFinishTask(true);
+
+        setCurrentTaskId(taskId);
+    };
+
     return (
-        <StyledTask>
-            <div className="flag"></div>
+        <StyledTask
+            style={{
+                background: isFinished ? 'var(--blue)' : 'transparent'
+            }}
+        >
             <div className="container-button">
-                <Button>
+                <Button
+                    style={{ cursor: isFinished ? 'not-allowed' : 'pointer' }}
+                    disabled={isFinished}
+                    onClick={() => openModalFinishTask()}
+                >
                     <AiOutlineCheck
-                        color="var(--blue)"
+                        color={styledFinishedTask}
                         size={25}
                         title="Concluir tarefa"
                     />
@@ -31,22 +60,37 @@ const Task = ({ task }: teste) => {
             </div>
 
             <div className="container-task">
-                <p>{task.description}</p>
+                <p style={{ color: styledFinishedTask }}>{task.description}</p>
             </div>
 
             <div className="container-infos">
-                <span>
-                    <RiTodoLine size={20} title="Criado em" /> {createdAt}
+                <span style={{ color: styledFinishedTask }}>
+                    <RiTodoLine
+                        color={styledFinishedTask}
+                        size={20}
+                        title="Data de criação da tarefa"
+                    />{' '}
+                    {createdAt}
                 </span>
-                <span>
-                    <BiTimeFive size={20} title="Prazo" /> {task.deadline}
+
+                <span style={{ color: styledFinishedTask }}>
+                    <BiTimeFive
+                        color={styledFinishedTask}
+                        size={20}
+                        title="Prazo"
+                    />{' '}
+                    {task.deadline}
                 </span>
             </div>
 
             <div className="container-edit">
-                <Button>
+                <Button
+                    style={{ cursor: isFinished ? 'not-allowed' : 'pointer' }}
+                    disabled={isFinished}
+                    onClick={() => openModalEdit()}
+                >
                     <FiEdit2
-                        color="var(--blue)"
+                        color={styledFinishedTask}
                         title="Editar tarefa"
                         size={25}
                     />

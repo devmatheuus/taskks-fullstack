@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledTask = styled.li`
     display: flex;
-    border-top: 1px solid var(--semi-gray);
+    border-top: 1px solid var();
     border-bottom: 1px solid var(--semi-gray);
 
     margin: 1px 0px;
@@ -81,31 +81,33 @@ export const StyledTask = styled.li`
         align-items: flex-end;
 
         margin: 5px;
-        border: 1px solid var(--semi-gray);
+        padding: 5px;
+        border-top: 2px solid var(--semi-gray);
+        border-bottom: 2px solid var(--semi-gray);
         border-radius: 8px;
 
-        max-height: 250px;
-        width: 82%;
+        max-height: 200px;
+        width: 80%;
         align-self: center;
-
-        .flag {
-            display: flex;
-            padding: 25px;
-            background: var(--blue);
-            border-radius: 8px 8px 0px 0px;
-            width: 100%;
-        }
 
         .container-button {
             order: 4;
-            transform: translateY(-90px);
+            border: none;
+            transform: translateY(-125px);
         }
 
         .container-task {
             min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
 
             p {
-                min-height: 60px;
+                border-bottom: 1px solid var(--semi-gray);
+                border-top: 1px solid var(--semi-gray);
+
+                padding: 5px 0px;
             }
         }
 
@@ -117,13 +119,18 @@ export const StyledTask = styled.li`
             justify-content: space-between;
             width: 40%;
 
-            transform: translateY(20px);
+            transform: translateY(-10px);
             z-index: 0;
 
             span {
+                border-bottom: 1px solid var(--semi-gray);
+
+                padding: 5px 0px;
+
                 margin: 15px 0px;
                 font-size: 1.6rem;
                 color: var(--semi-black);
+
                 svg {
                     color: var(--blue);
                     min-height: 10px;
@@ -135,7 +142,7 @@ export const StyledTask = styled.li`
         .container-edit {
             order: 3;
 
-            transform: translateY(-80px);
+            transform: translateY(-130px);
         }
     }
 `;

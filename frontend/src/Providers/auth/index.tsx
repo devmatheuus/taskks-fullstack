@@ -59,13 +59,16 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     };
 
     const signIn = (userData: IUserData) => {
+        toast.loading('Conectando...');
         api.post('/login', userData)
             .then(response => {
                 localStorage.setItem('token', response.data.token);
 
                 setToken(response.data.token);
 
+                toast.dismiss();
                 toast.success('Login efetuado com sucesso!');
+
                 setAuthenticated(true);
 
                 setTimeout(() => {
@@ -73,21 +76,25 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
                 }, 1000);
             })
             .catch(error => {
+                toast.dismiss();
                 toast.error('Email ou senha inválidos');
             });
     };
 
     const signUp = (userData: IUserData) => {
+        toast.loading('Criando conta...');
         api.post('/accounts', userData)
             .then(response => {
+                toast.dismiss();
                 toast.success('Cadastro efetuado com sucesso!');
 
                 setTimeout(() => {
-                    history.push('/');
+                    history.push('/signin');
                 }, 1000);
             })
             .catch(error => {
-                toast.error('Email ou senha inválidos');
+                toast.dismiss();
+                toast.error('Email já cadastrado');
             });
     };
 
