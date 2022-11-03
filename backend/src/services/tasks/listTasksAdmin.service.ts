@@ -20,7 +20,7 @@ const listTasksAdminService = async (page: number, late: string) => {
         );
     }
 
-    const perPage = 2;
+    const perPage = 3;
     let nextPage: number | null = page + 1;
     let previousPage: number | null = page - 1;
 
@@ -50,7 +50,12 @@ const listTasksAdminService = async (page: number, late: string) => {
         return data;
     });
 
-    if (nextPage >= total || tasks.length === 1) {
+    if (
+        nextPage >= total ||
+        tasks.length === 1 ||
+        tasks.length === 2 ||
+        !tasks.length
+    ) {
         nextPage = null;
         next = null;
     }
