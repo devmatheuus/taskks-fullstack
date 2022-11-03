@@ -1,18 +1,26 @@
 import Button from '../Button/style';
 
-import { AiOutlineUser } from 'react-icons/ai';
-import { BiTimeFive } from 'react-icons/bi';
 import { StyledAdminListContainer } from './style';
 import AdminItemList from '../AdminItemList/index';
+import { UseAuth } from '../../Providers/auth/index';
+import { UseAdmin } from '../../Providers/admin';
+import { useEffect } from 'react';
+import { IListTasksResponse } from '../../interfaces/admin/index';
 
 const AdminList = () => {
+    const { token } = UseAuth();
+    const { loadTasksDatas, tasksData } = UseAdmin();
+
+    useEffect(() => {
+        loadTasksDatas(token);
+    }, []);
+
     return (
         <StyledAdminListContainer>
             <div className="container">
                 <ul className="container-infos">
-                    <AdminItemList />
-                    <AdminItemList />
-                    <AdminItemList />
+                    {tasksData.length > 0 &&
+                        tasksData.map(task => <AdminItemList task={task} />)}
                 </ul>
             </div>
             <div className="container-buttons">

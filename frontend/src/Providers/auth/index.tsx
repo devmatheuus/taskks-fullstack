@@ -9,7 +9,8 @@ import { useHistory, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import api from '../../services/api';
-import decodedToken from '../../utils/decodedJwt';
+import jwt_decode from 'jwt-decode';
+import { jwtPayload } from '../../interfaces/auth/index';
 
 interface IAuthProviderProps {
     children: ReactNode;
@@ -72,8 +73,14 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
 
                 setAuthenticated(true);
 
+                const isAdmin: jwtPayload = jwt_decode(response.data.token);
+
                 setTimeout(() => {
-                    history.push('/dashboard');
+                    if (isAdmin.is_admin === true) {
+                        return history.push('/dashboard/admin');
+                    } else {
+                        return history.push('/dashboard');
+                    }
                 }, 1000);
             })
             .catch(error => {

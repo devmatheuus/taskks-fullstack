@@ -7,14 +7,18 @@ import { Redirect } from 'react-router-dom';
 import ModalCreate from '../../components/ModalCreate';
 import ModalUpdate from '../../components/ModalUpdate/index';
 import ModalFinishTask from '../../components/ModalFinishTask/index';
+import { jwtPayload } from '../../interfaces/auth/index';
+import jwt_decode from 'jwt-decode';
 
 const Dashboard = () => {
-    const { authenticated } = UseAuth();
+    const { authenticated, token } = UseAuth();
     const { showModal, showModalUpdate, showModalFinishTask } = UseDash();
 
-    if (!authenticated) {
-        return <Redirect to="/" />;
-    }
+    const account: jwtPayload = jwt_decode(token);
+
+    if (account.is_admin) return <Redirect to="/dashboard/admin" />;
+
+    if (!authenticated) return <Redirect to="/" />;
 
     return (
         <>

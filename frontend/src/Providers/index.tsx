@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import { AdminProvider } from './admin';
 import { AuthProvider } from './auth';
 import { DashProvider } from './dashboard/index';
 
@@ -10,7 +11,9 @@ const Providers = ({ children }: IProviderProps) => {
     return (
         <>
             <DashProvider>
-                <AuthProvider>{children}</AuthProvider>
+                <AuthProvider>
+                    <AdminProvider>{children}</AdminProvider>
+                </AuthProvider>
             </DashProvider>
         </>
     );
