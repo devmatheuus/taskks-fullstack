@@ -9,6 +9,7 @@ import { useHistory, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import api from '../../services/api';
+import decodedToken from '../../utils/decodedJwt';
 
 interface IAuthProviderProps {
     children: ReactNode;
