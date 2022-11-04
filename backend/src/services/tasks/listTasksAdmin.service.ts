@@ -1,4 +1,5 @@
 import AppDataSource from '../../data-source';
+
 import { Task } from '../../entities/task.entity';
 import { AppError } from '../../errors/AppError';
 
@@ -9,8 +10,28 @@ const listTasksAdminService = async (page: number, late: string) => {
         .createQueryBuilder('tasks')
         .leftJoinAndSelect('tasks.account', 'account');
 
+    const perPage = 3;
+
+    let nextPage: number | null = page + 1;
+    let previousPage: number | null = page - 1;
+    let total = await builder.getCount();
+
+    let previous:
+        | string
+        | null = `https://api-ubis.herokuapp.com/tasks/admin?page=${previousPage}`;
+
+    let next:
+        | string
+        | null = `https://api-ubis.herokuapp.com/tasks/admin?page=${nextPage}`;
+
     if (late) {
-        builder.where('tasks.is_late = :late', { late: `${late}` });
+        builder.where('tasks.is_late = :late', { late }).getMany();
+
+        next = `https://api-ubis.herokuapp.com/tasks/admin?page=${nextPage}&late=true`;
+
+        previous = `https://api-ubis.herokuapp.com/tasks/admin?page=${previousPage}&late=true`;
+
+        total = await builder.getCount();
     }
 
     if (late && late !== 'true') {
@@ -19,18 +40,6 @@ const listTasksAdminService = async (page: number, late: string) => {
             'the value of query param "late" must be equal to true'
         );
     }
-
-    const perPage = 3;
-    let nextPage: number | null = page + 1;
-    let previousPage: number | null = page - 1;
-
-    const total = await builder.getCount();
-
-    let previous:
-        | string
-        | null = `http://localhost:3001/tasks?page=${previousPage}`;
-
-    let next: string | null = `http://localhost:3001/tasks?page=${nextPage}`;
 
     if (previousPage <= 0) {
         previousPage = null;

@@ -26,14 +26,7 @@ export default {
     // coverageDirectory: undefined,
 
     // An array of regexp pattern strings used to skip coverage collection
-    coveragePathIgnorePatterns: [
-        '\\\\node_modules\\\\',
-        'src/data-source.ts',
-
-        //Removi o cobertura de testes para esses dois arquivos porque não existe um endpoint para criar usuários administradores
-        'src/controllers/task/listTasksAdmin.controller.ts',
-        'src/services/tasks/listTasksAdmin.service.ts'
-    ],
+    coveragePathIgnorePatterns: ['\\\\node_modules\\\\', 'src/data-source.ts'],
 
     // Indicates which provider should be used to instrument code for coverage
     coverageProvider: 'v8',

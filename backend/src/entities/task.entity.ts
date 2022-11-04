@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { v4 as uuid } from 'uuid';
 import { Account } from './account.entity';
 
 @Entity('tasks')

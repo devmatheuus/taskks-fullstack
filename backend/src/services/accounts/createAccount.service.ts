@@ -1,5 +1,7 @@
 import AppDataSource from '../../data-source';
+
 import { hash } from 'bcryptjs';
+
 import { Account } from '../../entities/account.entity';
 import { AppError } from '../../errors/AppError';
 import { IAccountRequest } from '../../interfaces/account/index';

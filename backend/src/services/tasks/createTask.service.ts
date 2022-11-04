@@ -1,7 +1,9 @@
 import AppDataSource from '../../data-source';
+
 import { Task } from '../../entities/task.entity';
 import { Account } from '../../entities/account.entity';
 import { AppError } from '../../errors/AppError';
+
 import { ICreateTaskRequest } from '../../interfaces/task';
 
 const createTaskService = async (

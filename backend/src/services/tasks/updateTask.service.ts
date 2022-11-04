@@ -1,7 +1,9 @@
 import AppDataSource from '../../data-source';
+
 import { Task } from '../../entities/task.entity';
 import { AppError } from '../../errors/AppError';
 import { IUpdateTaskRequest } from '../../interfaces/task';
+import getDateInNumber from '../../utils/getDateInNumber';
 
 const updateTaskService = async (
     task_id: string,
@@ -16,18 +18,15 @@ const updateTaskService = async (
         relations: { account: true }
     });
 
-    if (!task) throw new AppError(400, 'Task not found.');
+    if (!task) {
+        throw new AppError(400, 'Task not found.');
+    }
 
     if (task.is_finished) {
         throw new AppError(400, 'This task has already been completed.');
     }
-    const formateDeadline = task.deadline.split('/');
 
-    const day = formateDeadline[0];
-    const month = formateDeadline[1];
-    const year = formateDeadline[2];
-
-    const timeTaskDeadline = new Date(+year, +month - 1, +day).getTime();
+    const timeTaskDeadline = getDateInNumber(task.deadline);
 
     const isLate = today > timeTaskDeadline;
     const itsNotLate = timeTaskDeadline >= today;
@@ -39,6 +38,7 @@ const updateTaskService = async (
     }
 
     let taskToUpdate;
+
     if (is_finished === true) {
         taskToUpdate = taskRepository.create({
             description: description || task.description,
