@@ -1,8 +1,9 @@
 import { Switch, Route } from 'react-router-dom';
-import SignInPage from '../pages/signInPage';
 
-import WelcomePage from '../pages/welcomePage';
 import GlobalStyle from '../styles/global';
+
+import SignInPage from '../pages/signInPage';
+import WelcomePage from '../pages/welcomePage';
 import SignUpPage from '../pages/singUpPage/index';
 import Dashboard from '../pages/dashboard/index';
 import AdminDashboard from '../pages/adminDashboard/index';

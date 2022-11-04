@@ -1,46 +1,16 @@
-import {
-    createContext,
-    useContext,
-    useState,
-    ReactNode,
-    Dispatch,
-    SetStateAction
-} from 'react';
-
+import { createContext, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
-import { useHistory } from 'react-router-dom';
+
 import {
     ICreateTask,
     ITaskResponse,
     IUpdateTask
 } from '../../interfaces/tasks/index';
-
-interface IDashProviderProps {
-    children: ReactNode;
-}
-
-interface IDashProvider {
-    showModal: boolean;
-    setShowModal: Dispatch<SetStateAction<boolean>>;
-
-    showModalUpdate: boolean;
-    setShowModalUpdate: Dispatch<SetStateAction<boolean>>;
-
-    showModalFinishTask: boolean;
-    setShowModalFinishTask: Dispatch<SetStateAction<boolean>>;
-
-    tasks: ITaskResponse[];
-
-    currentTaskId: string;
-    setCurrentTaskId: Dispatch<SetStateAction<string>>;
-
-    loadTasks: (token: string) => void;
-    createTask: (task: ICreateTask, token: string) => void;
-    updateTask: (task: IUpdateTask, token: string, taskId: string) => void;
-    finishTask: (isFinished: boolean, token: string, taskId: string) => void;
-}
+import { IDashProvider } from '../../interfaces/dashboardProvider';
+import { IGenericChildren } from '../../interfaces/childrenInterface';
 
 const DashContext = createContext<IDashProvider>({} as IDashProvider);
 
@@ -50,7 +20,7 @@ export const UseDash = () => {
     return context;
 };
 
-export const DashProvider = ({ children }: IDashProviderProps) => {
+export const DashProvider = ({ children }: IGenericChildren) => {
     const history = useHistory();
 
     const [showModal, setShowModal] = useState(false);
@@ -79,6 +49,7 @@ export const DashProvider = ({ children }: IDashProviderProps) => {
 
     const createTask = (task: ICreateTask, token: string) => {
         toast.loading('Criando tarefa...');
+
         api.post('/tasks', task, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -89,14 +60,18 @@ export const DashProvider = ({ children }: IDashProviderProps) => {
                 toast.success('Tarefa criada com sucesso');
                 setTasks([...tasks, response.data.task]);
             })
-            .catch(() => toast.error('Revise os campos'))
+            .catch(() => {
+                toast.dismiss();
+                toast.error('Revise os campos');
+            })
             .finally(() => {
                 setShowModal(false);
             });
     };
 
     const updateTask = (task: IUpdateTask, token: string, taskId: string) => {
-        toast.loading('Criando tarefa...');
+        toast.loading('Atualizando tarefa...');
+
         api.patch(`/tasks/${taskId}`, task, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -104,12 +79,15 @@ export const DashProvider = ({ children }: IDashProviderProps) => {
         })
             .then(response => {
                 loadTasks(token);
+
                 toast.dismiss();
                 toast.success('Tarefa editada com sucesso');
             })
             .catch(() => {
                 toast.dismiss();
-                toast.error('Revise os campos');
+                toast.error(
+                    'O campo "descrição" deve conter ao menos5 caracteres!'
+                );
             })
             .finally(() => {
                 setShowModalUpdate(false);
@@ -118,17 +96,17 @@ export const DashProvider = ({ children }: IDashProviderProps) => {
 
     const finishTask = (isFinished: boolean, token: string, taskId: string) => {
         toast.loading('Finalizando tarefa...');
-        api.patch(
-            `/tasks/${taskId}`,
-            { is_finished: isFinished },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
+
+        const finishTask = { is_finished: isFinished };
+
+        api.patch(`/tasks/${taskId}`, finishTask, {
+            headers: {
+                Authorization: `Bearer ${token}`
             }
-        )
+        })
             .then(response => {
                 loadTasks(token);
+
                 toast.dismiss();
                 toast.success('Tarefa finalizada com sucesso');
             })

@@ -1,22 +1,15 @@
 import Button from '../Button/style';
+import { StyledTask } from './style';
+
 import { AiOutlineCheck } from 'react-icons/ai';
 import { RiTodoLine } from 'react-icons/ri';
 import { BiTimeFive } from 'react-icons/bi';
 import { FiEdit2 } from 'react-icons/fi';
-import { StyledTask } from './style';
+
 import { UseDash } from '../../Providers/dashboard/index';
+import { IRenderUserTasks } from '../../interfaces/tasks/index';
 
-interface IRenderTask {
-    task: {
-        description: string;
-        created_at: Date;
-        deadline: string;
-        id: string;
-        is_finished: boolean;
-    };
-}
-
-const Task = ({ task }: IRenderTask) => {
+const Task = ({ task }: IRenderUserTasks) => {
     const { setShowModalUpdate, setCurrentTaskId, setShowModalFinishTask } =
         UseDash();
 
@@ -27,16 +20,16 @@ const Task = ({ task }: IRenderTask) => {
 
     const styledFinishedTask = isFinished ? 'var(--white)' : 'var(--blue)';
 
-    const openModalEdit = () => {
-        setShowModalUpdate(true);
-
+    const saveCurrentTask = () => {
         setCurrentTaskId(taskId);
     };
 
-    const openModalFinishTask = () => {
-        setShowModalFinishTask(true);
+    const openModal = (modalType?: string) => {
+        modalType === 'finish'
+            ? setShowModalFinishTask(true)
+            : setShowModalUpdate(true);
 
-        setCurrentTaskId(taskId);
+        saveCurrentTask();
     };
 
     return (
@@ -49,7 +42,7 @@ const Task = ({ task }: IRenderTask) => {
                 <Button
                     style={{ cursor: isFinished ? 'not-allowed' : 'pointer' }}
                     disabled={isFinished}
-                    onClick={() => openModalFinishTask()}
+                    onClick={() => openModal('finish')}
                 >
                     <AiOutlineCheck
                         color={styledFinishedTask}
@@ -87,7 +80,7 @@ const Task = ({ task }: IRenderTask) => {
                 <Button
                     style={{ cursor: isFinished ? 'not-allowed' : 'pointer' }}
                     disabled={isFinished}
-                    onClick={() => openModalEdit()}
+                    onClick={() => openModal()}
                 >
                     <FiEdit2
                         color={styledFinishedTask}

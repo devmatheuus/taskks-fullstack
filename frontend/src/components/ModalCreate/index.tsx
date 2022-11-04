@@ -1,19 +1,21 @@
-import Input from '../Input';
-
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import Input from '../Input';
 import { Span } from '../Span/style';
 import Button from '../Button/style';
 import { ContainerModal } from './style';
+import InputDate from '../InputDate/index';
 
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 import { UseDash } from '../../Providers/dashboard';
-import { ICreateTask } from '../../interfaces/tasks/index';
-import { createTaskSchema } from '../../schemas/tasks/index';
 import { UseAuth } from '../../Providers/auth/index';
-import InputDate from '../InputDate/index';
-import { toast } from 'react-toastify';
+
+import { ICreateTask } from '../../interfaces/tasks/index';
+
+import { createTaskSchema } from '../../schemas/tasks/index';
+
 import verifyDeadlineIsValid from '../../utils/verifyDeadlineIsValid';
 
 const ModalCreate = () => {
@@ -31,7 +33,9 @@ const ModalCreate = () => {
     const onCreateSubmitFunction = async (task: ICreateTask) => {
         const deadlineIsValid = verifyDeadlineIsValid(task.deadline);
 
-        if (deadlineIsValid) createTask(task, token);
+        if (deadlineIsValid) {
+            createTask(task, token);
+        }
     };
 
     return (

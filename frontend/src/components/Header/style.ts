@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const ContainerHeader = styled.header`
-    padding: 10px 15px;
     display: flex;
     justify-content: center;
+
+    padding: 10px 15px;
 
     background: var(--white);
 

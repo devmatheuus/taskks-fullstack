@@ -2,39 +2,37 @@ import styled from 'styled-components';
 
 export const StyledTask = styled.li`
     display: flex;
+
     border-top: 1px solid var();
     border-bottom: 1px solid var(--semi-gray);
 
     margin: 1px 0px;
 
-    background: red;
-
-    .flag {
-        display: none;
-    }
-
     .container-button {
         border-right: 1px solid var(--semi-gray);
+
         button {
             background: transparent;
         }
     }
 
     .container-task {
-        padding: 0px 10px;
         display: flex;
         align-items: center;
 
         width: 100%;
         max-width: 400px;
-        overflow-y: auto;
-
         min-width: 150px;
+        padding: 0px 10px;
+
+        overflow-y: auto;
 
         p {
             color: var(--blue);
+
             font-weight: 600;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
+
             max-height: 35px;
         }
 
@@ -53,9 +51,10 @@ export const StyledTask = styled.li`
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        width: 30%;
 
+        width: 30%;
         margin-left: 2%;
+
         span {
             font-size: 1.3rem;
 
@@ -65,6 +64,7 @@ export const StyledTask = styled.li`
             gap: 5px;
 
             color: var(--semi-black);
+
             svg {
                 color: var(--blue);
             }
@@ -74,6 +74,7 @@ export const StyledTask = styled.li`
     .container-edit {
         button {
             height: 100%;
+
             background: transparent;
         }
     }
@@ -81,29 +82,32 @@ export const StyledTask = styled.li`
     @media (max-width: 500px) {
         flex-direction: column;
         align-items: flex-end;
+        align-self: center;
 
-        margin: 5px;
-        padding: 5px;
         border-top: 2px solid var(--semi-gray);
         border-bottom: 2px solid var(--semi-gray);
         border-radius: 8px;
 
-        max-height: 200px;
         width: 80%;
-        align-self: center;
+        max-height: 200px;
+        margin: 5px;
+        padding: 5px;
 
         .container-button {
             order: 4;
+
             border: none;
+
             transform: translateY(-125px);
         }
 
         .container-task {
-            min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
+
+            min-height: 80px;
 
             p {
                 border-bottom: 1px solid var(--semi-gray);
@@ -115,26 +119,28 @@ export const StyledTask = styled.li`
 
         .container-infos {
             order: 1;
-
             align-self: flex-start;
-
             justify-content: space-between;
+
             width: 40%;
 
             transform: translateY(-10px);
+
             z-index: 0;
 
             span {
                 border-bottom: 1px solid var(--semi-gray);
 
                 padding: 5px 0px;
-
                 margin: 15px 0px;
+
                 font-size: 1.6rem;
+
                 color: var(--semi-black);
 
                 svg {
                     color: var(--blue);
+
                     min-height: 10px;
                     min-width: 20px;
                 }

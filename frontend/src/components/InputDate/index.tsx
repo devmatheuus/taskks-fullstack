@@ -1,5 +1,6 @@
-import InputContainer from '../Input/style';
 import { InputHTMLAttributes } from 'react';
+
+import InputContainer from '../Input/style';
 import InputMask from 'react-input-mask';
 
 interface IComponentProps extends InputHTMLAttributes<HTMLInputElement> {

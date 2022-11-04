@@ -49,6 +49,8 @@ export const ContainerModal = styled.div`
             h1 {
                 font-weight: 700;
                 font-size: 1.9rem;
+
+                color: var(--dark-gray);
             }
         }
 
@@ -58,10 +60,14 @@ export const ContainerModal = styled.div`
 
             display: flex;
             align-items: center;
+
             p {
-                font-weight: 500;
+                font-weight: 600;
                 font-size: 1.5rem;
+
+                color: var(--dark-gray);
             }
+
             svg {
                 min-width: 20px;
                 min-height: 20px;
@@ -72,8 +78,9 @@ export const ContainerModal = styled.div`
 
         .container-buttons {
             display: flex;
-            width: 100%;
             justify-content: space-around;
+
+            width: 100%;
         }
     }
 `;

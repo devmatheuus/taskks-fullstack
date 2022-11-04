@@ -1,34 +1,14 @@
-import {
-    createContext,
-    useContext,
-    useState,
-    ReactNode,
-    useEffect
-} from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+
 import { useHistory, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import api from '../../services/api';
 import jwt_decode from 'jwt-decode';
-import { jwtPayload } from '../../interfaces/auth/index';
 
-interface IAuthProviderProps {
-    children: ReactNode;
-}
-
-interface IUserData {
-    email: string;
-    password: string;
-}
-
-interface IAuthProvider {
-    token: string;
-    signIn: (userData: IUserData) => void;
-    signUp: (userData: IUserData) => void;
-    authenticated: boolean;
-    setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-    logout: () => void;
-}
+import { IUserData, jwtPayload } from '../../interfaces/auth/index';
+import { IAuthProvider } from '../../interfaces/auth/provider';
+import { IGenericChildren } from '../../interfaces/childrenInterface';
 
 const AuthContext = createContext<IAuthProvider>({} as IAuthProvider);
 
@@ -38,8 +18,9 @@ export const UseAuth = () => {
     return context;
 };
 
-export const AuthProvider = ({ children }: IAuthProviderProps) => {
+export const AuthProvider = ({ children }: IGenericChildren) => {
     const [authenticated, setAuthenticated] = useState(false);
+
     const history = useHistory();
 
     useEffect(() => {
@@ -56,12 +37,15 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
 
     const logout = () => {
         setAuthenticated(false);
+
         <Redirect to="/" />;
+
         localStorage.clear();
     };
 
     const signIn = (userData: IUserData) => {
         toast.loading('Conectando...');
+
         api.post('/login', userData)
             .then(response => {
                 localStorage.setItem('token', response.data.token);
@@ -91,6 +75,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
 
     const signUp = (userData: IUserData) => {
         toast.loading('Criando conta...');
+
         api.post('/accounts', userData)
             .then(response => {
                 toast.dismiss();

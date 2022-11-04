@@ -55,6 +55,8 @@ export const ContainerModal = styled.div`
             h1 {
                 font-weight: 700;
                 font-size: 1.9rem;
+
+                color: var(--dark-gray);
             }
 
             button {
@@ -73,10 +75,10 @@ export const ContainerModal = styled.div`
 
         form {
             display: flex;
-            width: 100%;
             flex-direction: column;
             align-items: center;
 
+            width: 100%;
             gap: 1rem;
 
             input,

@@ -1,37 +1,13 @@
-import {
-    createContext,
-    useContext,
-    useState,
-    ReactNode,
-    Dispatch,
-    SetStateAction
-} from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 import { toast } from 'react-toastify';
 
 import api from '../../services/api';
 import { useHistory } from 'react-router-dom';
-import { IListTasksResponse, ITasksDatas } from '../../interfaces/admin/index';
-import {
-    ICreateTask,
-    ITaskResponse,
-    IUpdateTask
-} from '../../interfaces/tasks/index';
+import { IListTasksResponse } from '../../interfaces/admin/index';
 
-interface IAdminProps {
-    children: ReactNode;
-}
-
-interface IAdminProvier {
-    allDatasTask: IListTasksResponse;
-    setAllDatasTask: Dispatch<SetStateAction<IListTasksResponse>>;
-
-    loadTasksDatas: (token: string, late?: boolean) => void;
-    filterLastTasks: (token: string) => void;
-    next: () => void;
-    prev: () => void;
-    currentPage: string | null;
-}
+import { IAdminProvier } from '../../interfaces/admin/provider';
+import { IGenericChildren } from '../../interfaces/childrenInterface';
 
 const AdminContext = createContext<IAdminProvier>({} as IAdminProvier);
 
@@ -41,7 +17,7 @@ export const UseAdmin = () => {
     return context;
 };
 
-export const AdminProvider = ({ children }: IAdminProps) => {
+export const AdminProvider = ({ children }: IGenericChildren) => {
     const history = useHistory();
 
     const [allDatasTask, setAllDatasTask] = useState({} as IListTasksResponse);
@@ -69,6 +45,7 @@ export const AdminProvider = ({ children }: IAdminProps) => {
                 setAllDatasTask(response.data);
             })
             .catch(() => {
+                localStorage.clear();
                 toast.error(
                     'Erro ao carregar informações, faça login novamente'
                 );
@@ -85,10 +62,6 @@ export const AdminProvider = ({ children }: IAdminProps) => {
         setCurrentPage(allDatasTask.tasks.previous!);
     };
 
-    const filterLastTasks = (token: string) => {
-        const lastTask = allDatasTask.tasks?.tasks.filter(task => task);
-    };
-
     return (
         <AdminContext.Provider
             value={{
@@ -97,8 +70,7 @@ export const AdminProvider = ({ children }: IAdminProps) => {
                 setAllDatasTask,
                 next,
                 prev,
-                currentPage,
-                filterLastTasks
+                currentPage
             }}
         >
             {children}

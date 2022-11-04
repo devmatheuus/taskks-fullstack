@@ -1,13 +1,9 @@
-import React, { ReactNode } from 'react';
 import { AdminProvider } from './admin';
 import { AuthProvider } from './auth';
 import { DashProvider } from './dashboard/index';
+import { IGenericChildren } from '../interfaces/childrenInterface';
 
-interface IProviderProps {
-    children: ReactNode;
-}
-
-const Providers = ({ children }: IProviderProps) => {
+const Providers = ({ children }: IGenericChildren) => {
     return (
         <>
             <DashProvider>

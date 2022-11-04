@@ -33,6 +33,7 @@ export const ContainerModal = styled.div`
 
         gap: 22px;
         width: 369px;
+        padding: 10px;
 
         overflow-y: auto;
 
@@ -42,8 +43,6 @@ export const ContainerModal = styled.div`
         border-radius: 4px;
 
         animation: ${appearFromRight} 1s;
-
-        padding: 10px;
 
         .header-controls {
             display: flex;
@@ -73,10 +72,10 @@ export const ContainerModal = styled.div`
 
         form {
             display: flex;
-            width: 100%;
             flex-direction: column;
             align-items: center;
 
+            width: 100%;
             gap: 1rem;
 
             input,

@@ -1,22 +1,26 @@
-import Input from '../Input';
-
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Span } from '../Span/style';
+
+import Input from '../Input';
+import InputDate from '../InputDate/index';
 import Button from '../Button/style';
+import { Span } from '../Span/style';
 import { ContainerModal } from './style';
 
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 import { UseDash } from '../../Providers/dashboard';
-import { IUpdateTask } from '../../interfaces/tasks/index';
-import { updateTaskSchema } from '../../schemas/tasks/index';
 import { UseAuth } from '../../Providers/auth/index';
-import InputDate from '../InputDate/index';
-import verifyDeadlineIsValid from '../../utils/verifyDeadlineIsValid';
+
+import { IUpdateTask } from '../../interfaces/tasks/index';
+
+import { updateTaskSchema } from '../../schemas/tasks/index';
+
+import getDefaultTaskValues from '../../utils/getDefaultTaskValues';
 
 const ModalUpdate = () => {
-    const { setShowModalUpdate, updateTask, currentTaskId } = UseDash();
+    const { setShowModalUpdate, updateTask, currentTaskId, tasks } = UseDash();
+
     const { token } = UseAuth();
 
     const {
@@ -28,10 +32,14 @@ const ModalUpdate = () => {
     });
 
     const onUpdateSubmitFunction = async (task: IUpdateTask) => {
-        const deadlineIsValid = verifyDeadlineIsValid(task.deadline!);
+        const defaultValues = getDefaultTaskValues(task, currentTaskId, tasks);
 
-        if (deadlineIsValid) updateTask(task, token, currentTaskId);
+        updateTask(defaultValues, token, currentTaskId);
     };
+
+    const defaultValuePlaceholder = tasks.find(
+        task => task.id === currentTaskId
+    );
 
     return (
         <ContainerModal>
@@ -46,7 +54,7 @@ const ModalUpdate = () => {
 
                 <form onSubmit={handleSubmit(onUpdateSubmitFunction)}>
                     <Input
-                        placeholder="Qual será a nova descrição?"
+                        placeholder={defaultValuePlaceholder?.description}
                         label="Tarefa"
                         register={register}
                         name="description"
@@ -56,7 +64,7 @@ const ModalUpdate = () => {
                     )}
 
                     <InputDate
-                        placeholder="Qual sera o novo prazo?"
+                        placeholder={defaultValuePlaceholder?.deadline}
                         label="Prazo"
                         register={register}
                         name="deadline"

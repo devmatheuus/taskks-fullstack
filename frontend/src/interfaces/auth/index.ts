@@ -4,3 +4,8 @@ export interface jwtPayload {
     exp: number;
     sub: string;
 }
+
+export interface IUserData {
+    email: string;
+    password: string;
+}

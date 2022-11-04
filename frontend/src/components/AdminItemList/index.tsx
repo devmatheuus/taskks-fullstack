@@ -1,17 +1,10 @@
 import { AiOutlineUser } from 'react-icons/ai';
 import { BiTimeFive } from 'react-icons/bi';
+
 import { ItemList } from './style';
-import { ITasksDatas, IListTasksResponse } from '../../interfaces/admin/index';
+import { IRenderAdminTasks } from '../../interfaces/tasks/index';
 
-interface IRenderTask {
-    task: {
-        email: string;
-        description: string;
-        deadline: string;
-    };
-}
-
-const AdminItemList = ({ task }: IRenderTask) => {
+const AdminItemList = ({ task }: IRenderAdminTasks) => {
     const { deadline, description, email } = task;
 
     return (

@@ -10,7 +10,6 @@ export const Container = styled.div`
     height: 100vh;
     max-width: 1400px;
     padding: 0 2%;
-
     margin: 0 auto;
 
     div:first-child {
@@ -19,6 +18,7 @@ export const Container = styled.div`
         p {
             font-size: 2rem;
             font-weight: 500;
+
             color: var(--semi-black);
         }
     }
@@ -36,7 +36,9 @@ export const Container = styled.div`
 
     .message {
         color: var(--semi-black);
+
         max-width: 250px;
+
         font-weight: 500;
         font-size: 1.5rem;
         text-align: center;

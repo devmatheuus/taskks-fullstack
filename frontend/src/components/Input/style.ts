@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const InputContainer = styled.div`
-    width: 100%;
     display: flex;
     flex-direction: column;
 
+    width: 100%;
     gap: 5px;
 
     label {
@@ -14,10 +14,12 @@ const InputContainer = styled.div`
 
     input {
         border-radius: 5px;
-        padding: 10px 10px;
-
         border: 1px solid var(--semi-black);
 
+        padding: 10px 10px;
+
+        color: var(--semi-black);
+        
         ::placeholder {
             color: var(--semi-black);
         }

@@ -1,11 +1,12 @@
 import Button from '../Button/style';
-
 import { StyledAdminListContainer } from './style';
+
 import AdminItemList from '../AdminItemList/index';
+
 import { UseAuth } from '../../Providers/auth/index';
 import { UseAdmin } from '../../Providers/admin';
-import { useEffect } from 'react';
 
+import { useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
 const AdminList = () => {
@@ -34,6 +35,7 @@ const AdminList = () => {
                     <Button onClick={() => loadTasksDatas(token, true)}>
                         Tarefas atrasadas
                     </Button>
+
                     <Button onClick={() => loadTasksDatas(token, false)}>
                         Todas as tarefas
                     </Button>
@@ -46,6 +48,7 @@ const AdminList = () => {
                         ))}
                 </ul>
             </div>
+
             <div className="container-buttons">
                 <Button
                     disabled={tasksInfos?.previous === null}
@@ -56,6 +59,7 @@ const AdminList = () => {
                 >
                     Anterior
                 </Button>
+
                 <Button
                     disabled={tasksInfos?.next === null}
                     style={{

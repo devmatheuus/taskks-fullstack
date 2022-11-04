@@ -1,6 +1,7 @@
+import { ContainerHeader } from './style';
+
 import Button from '../Button/style';
 import Logo from '../Logo';
-import { ContainerHeader } from './style';
 
 import { UseAuth } from '../../Providers/auth/index';
 

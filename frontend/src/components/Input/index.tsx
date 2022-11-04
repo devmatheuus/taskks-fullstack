@@ -1,6 +1,5 @@
 import InputContainer from './style';
 import { InputHTMLAttributes } from 'react';
-import InputMask from 'react-input-mask';
 
 interface IComponentProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string;

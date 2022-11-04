@@ -15,6 +15,7 @@ export const GenericContainer = styled.div`
     p {
         font-size: 2.5rem;
         font-weight: 600;
+
         color: var(--dark-gray);
     }
 
@@ -47,7 +48,8 @@ export const GenericContainer = styled.div`
 
     small {
         font-size: 1.1rem;
-        color: var(--semi-black);
         text-align: center;
+
+        color: var(--semi-black);
     }
 `;

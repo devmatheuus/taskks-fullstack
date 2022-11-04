@@ -13,10 +13,8 @@ export const createTaskSchema = yup.object().shape({
 });
 
 export const updateTaskSchema = yup.object().shape({
-    description: yup
-        .string()
-        .min(5, 'Este campo deve ter pelo menos 5 caracteres'),
-    deadline: yup.string().matches(dateValidation, 'Insira um data válida')
+    description: yup.string(),
+    deadline: yup.string()
 });
 
 export const finishTaskSchema = yup.object().shape({

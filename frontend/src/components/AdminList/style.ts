@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const StyledAdminListContainer = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 
     padding: 10px 35px;
 
@@ -17,6 +17,7 @@ export const StyledAdminListContainer = styled.div`
 
         button {
             padding: 15px 2px;
+
             font-size: 1.2rem;
         }
     }
@@ -27,11 +28,11 @@ export const StyledAdminListContainer = styled.div`
 
     .container-buttons {
         display: flex;
-        width: 100%;
-        max-width: 600px;
-
         justify-content: space-between;
         flex-wrap: wrap;
+
+        width: 100%;
+        max-width: 600px;
         padding: 10px;
 
         button {
@@ -40,25 +41,23 @@ export const StyledAdminListContainer = styled.div`
     }
 
     .container {
-        background: var(--white);
-        width: 100%;
-        max-width: 600px;
-
-        padding: 10px 5px;
-
         display: flex;
         flex-direction: column;
+
+        width: 100%;
+        max-width: 600px;
+        padding: 10px 5px;
+
+        background: var(--white);
 
         border-radius: 8px;
         border: 1px solid black;
 
         .container-infos {
             display: flex;
+            flex-direction: column;
 
             max-height: 350px;
-
-            display: flex;
-            flex-direction: column;
 
             overflow-y: auto;
 

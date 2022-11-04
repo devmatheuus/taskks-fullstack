@@ -1,14 +1,15 @@
 import { StyledTaskContainer } from './style';
 import Button from '../Button/style';
-
 import Task from '../Task/index';
 
 import { UseDash } from '../../Providers/dashboard';
-import { useEffect } from 'react';
 import { UseAuth } from '../../Providers/auth/index';
+
+import { useEffect } from 'react';
 
 const TaskContainer = () => {
     const { setShowModal, loadTasks, tasks } = UseDash();
+
     const { token } = UseAuth();
 
     useEffect(() => {

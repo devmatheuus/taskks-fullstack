@@ -1,20 +1,18 @@
 import image from '../../assets/signIn.svg';
-import Button from '../../components/Button/style';
+
 import { GenericContainer } from '../../components/GenericContainerStyle/style';
+import { Span } from '../../components/Span/style';
+import Button from '../../components/Button/style';
 import Input from '../../components/Input';
 
 import { Link, Redirect } from 'react-router-dom';
-
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { UseAuth } from '../../Providers/auth/index';
-import { Span } from '../../components/Span/style';
 import { formSchema } from '../../schemas/session/index';
 
-interface IUserData {
-    email: string;
-    password: string;
-}
+import { UseAuth } from '../../Providers/auth/index';
+
+import { IUserData } from '../../interfaces/auth';
 
 const SignInPage = () => {
     const { signIn, authenticated } = UseAuth();

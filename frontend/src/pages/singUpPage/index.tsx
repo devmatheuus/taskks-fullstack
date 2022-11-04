@@ -1,19 +1,19 @@
-import { Link, Redirect } from 'react-router-dom';
 import image from '../../assets/signUp.svg';
+
 import Button from '../../components/Button/style';
 import { GenericContainer } from '../../components/GenericContainerStyle/style';
 import Input from '../../components/Input';
+import { Span } from '../../components/Span/style';
 
+import { Link, Redirect } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+
 import { UseAuth } from '../../Providers/auth/index';
-import { Span } from '../../components/Span/style';
+
 import { formSchema } from '../../schemas/session/index';
 
-interface IUserData {
-    email: string;
-    password: string;
-}
+import { IUserData } from '../../interfaces/auth';
 
 const SignUpPage = () => {
     const { signUp, authenticated } = UseAuth();

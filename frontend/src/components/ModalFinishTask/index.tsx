@@ -3,6 +3,7 @@ import { ContainerModal } from './style';
 
 import { UseDash } from '../../Providers/dashboard';
 import { UseAuth } from '../../Providers/auth/index';
+
 import { HiOutlineInformationCircle } from 'react-icons/hi';
 
 const ModalFinishTask = () => {
@@ -29,6 +30,7 @@ const ModalFinishTask = () => {
                     <Button onClick={() => confirmTaskCompletion(true)}>
                         Confirmar
                     </Button>
+
                     <Button onClick={() => setShowModalFinishTask(false)}>
                         Cancelar
                     </Button>
