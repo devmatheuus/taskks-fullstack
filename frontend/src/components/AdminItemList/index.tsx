@@ -17,14 +17,18 @@ const AdminItemList = ({ task }: IRenderTask) => {
     return (
         <ItemList>
             <div className="container-datas">
-                <p>
-                    <AiOutlineUser size={20} color="var(--blue)" />
-                    {email}
-                </p>
-                <p>
-                    <BiTimeFive size={20} color="var(--blue)" />
-                    {deadline}
-                </p>
+                <div>
+                    <p>
+                        <AiOutlineUser size={20} color="var(--blue)" />
+                        {email}
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <BiTimeFive size={20} color="var(--blue)" />
+                        {deadline}
+                    </p>
+                </div>
             </div>
             <p className="description">{description} </p>
         </ItemList>

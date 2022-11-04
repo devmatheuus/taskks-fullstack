@@ -23,13 +23,14 @@ interface IAdminProps {
 }
 
 interface IAdminProvier {
-    tasksData: ITasksDatas[];
-    setTasksDatas: Dispatch<SetStateAction<ITasksDatas[]>>;
+    allDatasTask: IListTasksResponse;
+    setAllDatasTask: Dispatch<SetStateAction<IListTasksResponse>>;
 
-    allDatasTask: IListTasksResponse[];
-    setAllDatasTask: Dispatch<SetStateAction<IListTasksResponse[]>>;
-
-    loadTasksDatas: (token: string) => void;
+    loadTasksDatas: (token: string, late?: boolean) => void;
+    filterLastTasks: (token: string) => void;
+    next: () => void;
+    prev: () => void;
+    currentPage: string | null;
 }
 
 const AdminContext = createContext<IAdminProvier>({} as IAdminProvier);
@@ -43,38 +44,61 @@ export const UseAdmin = () => {
 export const AdminProvider = ({ children }: IAdminProps) => {
     const history = useHistory();
 
-    const [tasksData, setTasksDatas] = useState(Array<ITasksDatas>);
-    const [allDatasTask, setAllDatasTask] = useState(Array<IListTasksResponse>);
+    const [allDatasTask, setAllDatasTask] = useState({} as IListTasksResponse);
 
-    const loadTasksDatas = (token: string) => {
+    const [currentPage, setCurrentPage] = useState<string>('/tasks/admin');
+
+    const loadTasksDatas = (token: string, late?: boolean) => {
+        if (late === true) {
+            setCurrentPage('/tasks/admin?late=true');
+        }
+
+        if (late === false) {
+            setCurrentPage('/tasks/admin');
+        }
+
         toast.loading('Carregando informações');
-        api.get('/tasks/admin', {
+
+        api.get(currentPage as string, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
             .then(response => {
                 toast.dismiss();
-                setAllDatasTask(response.data.tasks);
-                setTasksDatas(response.data.tasks.tasks);
+                setAllDatasTask(response.data);
             })
             .catch(() => {
-                toast.dismiss();
                 toast.error(
                     'Erro ao carregar informações, faça login novamente'
                 );
+                toast.dismiss();
                 history.push('/');
             });
+    };
+
+    const next = () => {
+        setCurrentPage(allDatasTask.tasks.next!);
+    };
+
+    const prev = () => {
+        setCurrentPage(allDatasTask.tasks.previous!);
+    };
+
+    const filterLastTasks = (token: string) => {
+        const lastTask = allDatasTask.tasks?.tasks.filter(task => task);
     };
 
     return (
         <AdminContext.Provider
             value={{
                 loadTasksDatas,
-                setTasksDatas,
-                tasksData,
                 allDatasTask,
-                setAllDatasTask
+                setAllDatasTask,
+                next,
+                prev,
+                currentPage,
+                filterLastTasks
             }}
         >
             {children}

@@ -7,7 +7,23 @@ export const StyledAdminListContainer = styled.div`
     flex-direction: column;
 
     padding: 10px 35px;
-    margin: 55px 0px;
+
+    .container-buttons-filer {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        padding: 15px 5px;
+
+        button {
+            padding: 15px 2px;
+            font-size: 1.2rem;
+        }
+    }
+
+    .container-info-page {
+        text-align: center;
+    }
 
     .container-buttons {
         display: flex;
@@ -54,6 +70,19 @@ export const StyledAdminListContainer = styled.div`
             ::-webkit-scrollbar-thumb {
                 background: var(--semi-gray);
                 border-radius: 10px;
+            }
+        }
+    }
+
+    @media (max-width: 300px) {
+        .container-buttons-filer {
+            flex-direction: column;
+            align-items: center;
+
+            gap: 15px;
+
+            button {
+                width: 70%;
             }
         }
     }
