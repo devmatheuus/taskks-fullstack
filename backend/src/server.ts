@@ -6,7 +6,7 @@ import app from './app';
         console.error('Error during Data Source initialization', err);
     });
 
-    app.listen(3001, () => {
-        console.log('Servidor executando em http://localhost:3001');
+    app.listen(3000, () => {
+        console.log('Servidor executando em http://localhost:3000');
     });
 })();
