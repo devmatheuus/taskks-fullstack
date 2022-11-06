@@ -2,10 +2,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Input from '../Input';
-import { Span } from '../Span/style';
-import Button from '../Button/style';
-import { ContainerModal } from './style';
 import InputDate from '../InputDate/index';
+import Button from '../Button/style';
+import { Span } from '../Span/style';
+import { ContainerModal } from './style';
 
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
@@ -31,11 +31,9 @@ const ModalCreate = () => {
     });
 
     const onCreateSubmitFunction = async (task: ICreateTask) => {
-        const deadlineIsValid = verifyDeadlineIsValid(task.deadline);
+        verifyDeadlineIsValid(task.deadline);
 
-        if (deadlineIsValid) {
-            createTask(task, token);
-        }
+        createTask(task, token);
     };
 
     return (

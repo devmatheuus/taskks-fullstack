@@ -18,6 +18,7 @@ export const StyledTaskContainer = styled.div`
 
         width: 100%;
         max-width: 800px;
+        min-height: 400px;
 
         border-radius: 8px;
         box-shadow: 0px 0px 15px 1px var(--dark-gray);
@@ -41,7 +42,6 @@ export const StyledTaskContainer = styled.div`
             flex-direction: column;
 
             overflow-y: auto;
-            box-shadow: 0px 0px 15px 1px var(--semi-gray);
 
             ::-webkit-scrollbar {
                 width: 5px;

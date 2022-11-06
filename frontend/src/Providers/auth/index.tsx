@@ -21,6 +21,10 @@ export const UseAuth = () => {
 export const AuthProvider = ({ children }: IGenericChildren) => {
     const [authenticated, setAuthenticated] = useState(false);
 
+    const [token, setToken] = useState(
+        () => (localStorage.getItem('token') as string) || ''
+    );
+
     const history = useHistory();
 
     useEffect(() => {
@@ -30,10 +34,6 @@ export const AuthProvider = ({ children }: IGenericChildren) => {
             return setAuthenticated(true);
         }
     }, [authenticated]);
-
-    const [token, setToken] = useState(
-        () => (localStorage.getItem('token') as string) || ''
-    );
 
     const logout = () => {
         setAuthenticated(false);

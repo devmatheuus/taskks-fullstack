@@ -34,6 +34,8 @@ export const DashProvider = ({ children }: IGenericChildren) => {
     const [currentTaskId, setCurrentTaskId] = useState('');
 
     const loadTasks = (token: string) => {
+        toast.loading('Carregando tarefas');
+
         api.get('/tasks', {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -41,9 +43,11 @@ export const DashProvider = ({ children }: IGenericChildren) => {
         })
             .then(response => {
                 setTasks(response.data.tasks);
+                toast.dismiss();
             })
             .catch(() => {
                 history.push('/');
+                toast.error('Erro ao carregar tarefas, faça login novamente');
             });
     };
 
@@ -86,7 +90,7 @@ export const DashProvider = ({ children }: IGenericChildren) => {
             .catch(() => {
                 toast.dismiss();
                 toast.error(
-                    'O campo "descrição" deve conter ao menos5 caracteres!'
+                    'O campo "descrição" deve conter ao menos 5 caracteres e o prazo deve ser maior que o dia atual!'
                 );
             })
             .finally(() => {

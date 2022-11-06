@@ -3,10 +3,12 @@ import styled from 'styled-components';
 export const StyledTask = styled.li`
     display: flex;
 
-    border-top: 1px solid var();
+    border-top: 1px solid var(--semi-gray);
     border-bottom: 1px solid var(--semi-gray);
 
     margin: 1px 0px;
+
+    width: 100%;
 
     .container-button {
         border-right: 1px solid var(--semi-gray);

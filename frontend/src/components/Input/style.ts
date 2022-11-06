@@ -5,7 +5,7 @@ const InputContainer = styled.div`
     flex-direction: column;
 
     width: 100%;
-    gap: 5px;
+    gap: 2px;
 
     label {
         color: var(--dark-gray);
@@ -19,7 +19,7 @@ const InputContainer = styled.div`
         padding: 10px 10px;
 
         color: var(--semi-black);
-        
+
         ::placeholder {
             color: var(--semi-black);
         }

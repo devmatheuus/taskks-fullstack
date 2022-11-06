@@ -7,6 +7,7 @@ import WelcomePage from '../pages/welcomePage';
 import SignUpPage from '../pages/singUpPage/index';
 import Dashboard from '../pages/dashboard/index';
 import AdminDashboard from '../pages/adminDashboard/index';
+import NotFound from '../pages/notFound';
 
 const Routes = () => {
     return (
@@ -27,6 +28,9 @@ const Routes = () => {
                 </Route>
                 <Route exact path="/dashboard/admin">
                     <AdminDashboard />
+                </Route>
+                <Route>
+                    <NotFound />
                 </Route>
             </Switch>
         </>

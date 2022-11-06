@@ -6,14 +6,14 @@ import Input from '../../components/Input';
 import { Span } from '../../components/Span/style';
 
 import { Link, Redirect } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm as UseForm } from 'react-hook-form';
 
 import { UseAuth } from '../../Providers/auth/index';
 
 import { formSchema } from '../../schemas/session/index';
 
 import { IUserData } from '../../interfaces/auth';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const SignUpPage = () => {
     const { signUp, authenticated } = UseAuth();
@@ -26,7 +26,7 @@ const SignUpPage = () => {
         register,
         handleSubmit,
         formState: { errors }
-    } = useForm<IUserData>({
+    } = UseForm<IUserData>({
         resolver: yupResolver(formSchema)
     });
 
@@ -38,8 +38,8 @@ const SignUpPage = () => {
         <GenericContainer>
             <p>Cadastre-se e vamos juntos nessa!</p>
 
-            <div>
-                <img src={image} alt="SignIn Image" />
+            <div className="container-image">
+                <img src={image} alt="SignIn" />
             </div>
 
             <form onSubmit={handleSubmit(onSubmitFunction)}>

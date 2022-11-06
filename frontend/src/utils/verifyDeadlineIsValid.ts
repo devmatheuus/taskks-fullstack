@@ -14,9 +14,7 @@ const verifyDeadlineIsValid = (deadline: string) => {
     if (timeTaskDeadline < today) {
         toast.error('Prazo inválido');
 
-        return false;
+        throw new Error();
     }
-
-    return true;
 };
 export default verifyDeadlineIsValid;

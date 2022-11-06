@@ -6,27 +6,42 @@ import { UseDash } from '../../Providers/dashboard';
 import { UseAuth } from '../../Providers/auth/index';
 
 import { useEffect } from 'react';
+import NoTasks from '../NoTasks';
+import { Redirect } from 'react-router-dom';
 
 const TaskContainer = () => {
     const { setShowModal, loadTasks, tasks } = UseDash();
+    const { setAuthenticated } = UseAuth();
 
     const { token } = UseAuth();
 
     useEffect(() => {
-        loadTasks(token);
+        try {
+            loadTasks(token);
+        } catch (error) {
+            setAuthenticated(false);
+
+            <Redirect to="/" />;
+
+            localStorage.clear();
+        }
     }, []);
 
     return (
         <StyledTaskContainer>
-            <div className="container">
-                <h1>Tarefas</h1>
+            {tasks.length > 0 ? (
+                <div className="container">
+                    <h1>Tarefas</h1>
 
-                <ul>
-                    {tasks.length > 0 &&
-                        tasks.map(task => <Task task={task} key={task.id} />)}
-                </ul>
-            </div>
-
+                    <ul>
+                        {tasks.map(task => (
+                            <Task task={task} key={task.id} />
+                        ))}
+                    </ul>
+                </div>
+            ) : (
+                <NoTasks />
+            )}
             <Button onClick={() => setShowModal(true)}>
                 Adicionar nova tarefa
             </Button>

@@ -16,16 +16,16 @@ import { jwtPayload } from '../../interfaces/auth/index';
 const Dashboard = () => {
     const { authenticated, token } = UseAuth();
 
+    if (!authenticated) {
+        return <Redirect to="/" />;
+    }
+
     const { showModal, showModalUpdate, showModalFinishTask } = UseDash();
 
     const account: jwtPayload = jwt_decode(token);
 
     if (account.is_admin === true) {
         return <Redirect to="/dashboard/admin" />;
-    }
-
-    if (!authenticated) {
-        return <Redirect to="/" />;
     }
 
     return (

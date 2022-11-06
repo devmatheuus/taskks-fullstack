@@ -13,7 +13,7 @@ const Button = styled.button`
     font-size: 1.2rem;
     font-weight: 600;
 
-    padding: 15px 30px;
+    padding: 10px 30px;
 
     background: var(--blue);
     color: var(--white);

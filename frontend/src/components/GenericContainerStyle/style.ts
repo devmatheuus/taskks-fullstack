@@ -6,25 +6,31 @@ export const GenericContainer = styled.div`
     justify-content: center;
     flex-direction: column;
 
-    gap: 1%;
     height: 100vh;
     max-width: 1400px;
-    padding: 2% 5%;
+    padding: 2px 6px;
     margin: 0 auto;
 
     p {
+        transform: translateY(20px);
+
         font-size: 2.5rem;
         font-weight: 600;
+        text-align: center;
 
         color: var(--dark-gray);
     }
 
-    div {
-        height: 60%;
-        max-height: 400px;
+    .container-image {
+        height: 50%;
+        max-height: 350px;
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
 
         img {
-            height: 100%;
+            height: 90%;
             max-width: 100%;
         }
     }
@@ -35,9 +41,8 @@ export const GenericContainer = styled.div`
         align-items: center;
         justify-content: center;
 
-        width: 55%;
+        width: 100%;
         max-width: 300px;
-        min-width: 200px;
         height: 200px;
         gap: 5px;
 
@@ -47,8 +52,10 @@ export const GenericContainer = styled.div`
     }
 
     small {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         text-align: center;
+
+        max-width: 70%;
 
         color: var(--semi-black);
     }
