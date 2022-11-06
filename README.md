@@ -1,14 +1,21 @@
+
 # TASKK´S
 
-_Bem vindo ao **TASKK'S**!!!_
+*Bem vindo ao **TASKK'S**!!!*
+ 
+*O readme esta separado em duas seções principais que vão dar informações necessárias para a execução do projeto, a primeira seção está relacionada a parte backend e a segunda seção fala sobre o frontend.*
 
-_O readme esta separado em duas seções principais que vão dar informações necessárias para a execução do projeto, a primeira seção está relacionada a parte backend e a segunda seção fala sobre o frontend._
+
 
 ## Backend - Instalação das dependências
 
 **Caso prefira executar o projeto utilizando Docker, pule essa seção.**
 
-_Após clonar o repositório, execute os seguintes comandos a partir da pasta do projeto para instalar os pacotes necessários:_
+ 
+
+*Após clonar o repositório, execute os seguintes comandos a partir da pasta do projeto para instalar os pacotes necessários:*
+
+
 
 ```bash
 
@@ -17,20 +24,22 @@ _Após clonar o repositório, execute os seguintes comandos a partir da pasta do
   yarn
 ```
 
+
 ### Formas de execução do projeto
 
-_Existem três formas para executar a API:_
+*Existem três formas para executar a API:*
 
--   _Utilizando Docker_
--   _Executando o projeto localmente_
--   _Url do deploy_
+* *Utilizando Docker;*
+* *Executando o projeto localmente;*
+* *Url do deploy;*
+
 
 ### Docker
 
--   _Crie um arquivo **.env** na raíz da pasta backend_
--   _Siga o exemplo abaixo para criar as variávies de ambiente necessárias para a execução do projeto_
+* *Crie um arquivo **.env** na raíz da pasta backend;*
+* *Siga o exemplo abaixo para criar as variávies de ambiente necessárias para a execução do projeto:*
 
----
+***
 
 ```
 # Não altere a variável DB_HOST
@@ -43,31 +52,30 @@ DB_HOST="db"
 SECRET_KEY="Uma chave secreta"
 
 ```
+***
 
----
-
--   _Após configurar o arquivo **.env** rode o seguinte comando em seu terminal para subir os containers:_
+* *Após configurar o arquivo **.env** rode o seguinte comando em seu terminal para subir os containers:*
 
 ```
 docker-compose up --build
 ```
-
--   _Ao fim do processo, a seguinte mensagem deve ser mostrada no terminal:_
+* *Ao fim do processo, a seguinte mensagem deve ser mostrada no terminal:*
 
 ```
 Servidor executando em http://localhost:3000
 ```
 
--   _A aplicação estará diponível na porta local 3000_
+* *A aplicação estará diponível na porta local 3000.*
+
 
 **Informações sobre os endpoints são citadas posteriormente.**
 
 ### Executando o projeto localmente
 
--   _Crie um arquivo **.env** na raíz da pasta backend_
--   _Siga o exemplo abaixo para criar as variávies de ambiente necessárias para a execução do projeto_
+* *Crie um arquivo **.env** na raíz da pasta backend;*
+* *Siga o exemplo abaixo para criar as variávies de ambiente necessárias para a execução do projeto:*
 
----
+***
 
 ```
 # Não altere a variável DB_HOST
@@ -80,52 +88,50 @@ DB_HOST="localhost"
 SECRET_KEY="Uma chave secreta"
 
 ```
+***
 
----
-
--   _Após configurar o arquivo **.env** e ter as dependências do projeto instaladas, execute o seguinte comando em seu terminal para criar as tabelas:_
+* *Após configurar o arquivo **.env** e ter as dependências do projeto instaladas, execute o seguinte comando em seu terminal para criar as tabelas:*
 
 ```
 yarn typeorm migration:run -d src/data-source.ts
 ```
 
-_Após a criação das tabelas, inicie a aplicação com o comando:_
-
+*Após a criação das tabelas, inicie a aplicação com o comando:*
 ```
 yarn dev
 ```
-
--   _Ao fim do processo, a seguinte mensagem deve ser mostrada no terminal:_
+* *Ao fim do processo, a seguinte mensagem deve ser mostrada no terminal:*
 
 ```
 Servidor executando em http://localhost:3000
 ```
 
--   _A aplicação estará diponível na porta local 3000_
+* *A aplicação estará diponível na porta local 3000.*
+
 
 **Informações sobre os endpoints são citadas posteriormente.**
 
 ### Url do deploy
-
-_A forma mais rápida para executar a aplicação, basta usar a seguinte url:_
-
+*A forma mais rápida para executar a aplicação, basta usar a seguinte url:*
 ```
 https://api-ubis.herokuapp.com
 ```
 
 ## Testes
-
 O projeto conta com testes unitários e testes de integração, para executá-los digite o seguinte comando em seu terminal:
-
 ```
   yarn test
+```
+Para visualizar a porcentagem de cobertura do código, execute o comando:
+```
+  yarn coverage
 ```
 
 ## Endpoints - /accounts
 
 ### POST - Criação de conta
 
-_Para criar uma nova conta, envie um json com as seguintes Informações:_
+*Para criar uma nova conta, envie um JSON com as seguintes Informações:*
 
 ```
 {
@@ -149,13 +155,13 @@ Em caso de sucesso, a seguinte resposta será retornada:
 
 ### Validações da rota
 
-_A aplicação realiza algumas verificações antes de cadastrar um novo usuário no banco de dados, são elas:_
+*A aplicação realiza algumas verificações antes de cadastrar um novo usuário no banco de dados, são elas:*
 
--   Email já existente;
--   Formato válido de email e no máximo 50 caracteres;
--   Senha com no mínimo 5 caracteres e 150 caracteres no máximo;
+* Email já existente;
+* Formato válido de email e no máximo 50 caracteres;
+* Senha com no mínimo 5 caracteres e 150 caracteres no máximo;
 
-_Resposta - email já existente:_
+*Resposta - email já existente:*
 
 ```
 {
@@ -165,7 +171,7 @@ _Resposta - email já existente:_
 }
 ```
 
-_Resposta - formato inválido de email:_
+*Resposta - formato inválido de email:*
 
 ```
 {
@@ -175,7 +181,7 @@ _Resposta - formato inválido de email:_
 }
 ```
 
-_Resposta - email com mais de 50 caracteres:_
+*Resposta - email com mais de 50 caracteres:*
 
 ```
 {
@@ -185,7 +191,7 @@ _Resposta - email com mais de 50 caracteres:_
 }
 ```
 
-_Resposta - senha com menos de 5 caracteres:_
+*Resposta - senha com menos de 5 caracteres:*
 
 ```
 {
@@ -194,8 +200,7 @@ _Resposta - senha com menos de 5 caracteres:_
 	"message": "password must be at least 5 characters"
 }
 ```
-
-_Resposta - senha com mais de 150 caracteres:_
+*Resposta - senha com mais de 150 caracteres:*
 
 ```
 {
@@ -209,7 +214,7 @@ _Resposta - senha com mais de 150 caracteres:_
 
 ### POST - Login na aplicação
 
-_Para o login ser realizado com sucesso, deve ser passsado o seguinte json com dados válidos:_
+*Para o login ser realizado com sucesso, deve ser passsado o seguinte JSON com dados válidos:*
 
 ```
 {
@@ -226,17 +231,17 @@ Em caso de sucesso, a seguinte resposta será retornada:
 }
 
 ```
-
 **OBS: Cada token é valido apenas por 2h.**
 
 ### Validações da rota
 
-_A aplicação realiza algumas verificações antes de retornar um token de autenticação para o usuário, são elas:_
+*A aplicação realiza algumas verificações antes de retornar um token de autenticação para o usuário, são elas:*
 
--   Formato válido de email e email existente;
--   Senha correta;
+* Formato válido de email e email existente;
+* Senha correta;
 
-_Resposta - formato inválido de email:_
+
+*Resposta - formato inválido de email:*
 
 ```
 {
@@ -246,7 +251,7 @@ _Resposta - formato inválido de email:_
 }
 ```
 
-_Resposta - Email ou senha inexistente:_
+*Resposta - Email ou senha inexistente:*
 
 ```
 {
@@ -260,7 +265,7 @@ _Resposta - Email ou senha inexistente:_
 
 ### POST - Criar uma nova tarefa
 
-_Para criar uma nova tarefa, o usuário deve estar autenticado e o seguinte JSON deve ser enviado:_
+*Para criar uma nova tarefa, o usuário deve estar autenticado e o seguinte JSON deve ser enviado:*
 
 ```
 {
@@ -269,7 +274,7 @@ _Para criar uma nova tarefa, o usuário deve estar autenticado e o seguinte JSON
 }
 ```
 
-_Em caso de sucesso, a seguinte resposta será retornada:_
+*Em caso de sucesso, a seguinte resposta será retornada:*
 
 ```
 {
@@ -295,13 +300,13 @@ _Em caso de sucesso, a seguinte resposta será retornada:_
 
 ### Validações da rota
 
-_A aplicação realiza algumas verificações antes de cadastrar uma nova tarefa:_
+*A aplicação realiza algumas verificações antes de cadastrar uma nova tarefa:*
 
--   Descrição(description) deve ser uma string com pelo menos 5 caracteres;
--   Prazo(deadline) deve ser uma string no formato mm/dd/yyyy, a data deve ser válida e a não pode ser menor ou igual ao dia atual;
--   O usuário deve estar autenticado e essa autenticação deve ser válida (token jwt)
+* Descrição(description) deve ser uma string com pelo menos 5 caracteres;
+* Prazo(deadline) deve ser uma string no formato mm/dd/yyyy, a data deve ser válida e a não pode ser menor ou igual ao dia atual;
+* O usuário deve estar autenticado e essa autenticação deve ser válida (token jwt);
 
-_Resposta - Descrição com menos de 5 caracteres:_
+*Resposta - Descrição com menos de 5 caracteres:*
 
 ```
 {
@@ -311,7 +316,7 @@ _Resposta - Descrição com menos de 5 caracteres:_
 }
 ```
 
-_Resposta - Tipo de valor inválido para descrição:_
+*Resposta - Tipo de valor inválido para descrição:*
 
 ```
 {
@@ -321,7 +326,7 @@ _Resposta - Tipo de valor inválido para descrição:_
 }
 ```
 
-_Resposta - Prazo fora do formato mm/dd/yyyy:_
+*Resposta - Prazo fora do formato mm/dd/yyyy:*
 
 ```
 {
@@ -331,7 +336,7 @@ _Resposta - Prazo fora do formato mm/dd/yyyy:_
 }
 ```
 
-_Resposta - Prazo com data menor que o dia atual:_
+*Resposta - Prazo com data menor que o dia atual:*
 
 ```
 {
@@ -341,7 +346,8 @@ _Resposta - Prazo com data menor que o dia atual:_
 }
 ```
 
-_Resposta - Sem autenticação:_
+
+*Resposta - Sem autenticação:*
 
 ```
 {
@@ -351,7 +357,8 @@ _Resposta - Sem autenticação:_
 }
 ```
 
-_Resposta - Autenticação inválida:_
+
+*Resposta - Autenticação inválida:*
 
 ```
 {
@@ -361,11 +368,12 @@ _Resposta - Autenticação inválida:_
 }
 ```
 
+
 ## Endpoints - /tasks/:task_id
 
 ### PATCH - Editar uma tarefa
 
-_Para editar uma nova tarefa, o usuário deve estar autenticado e o seguinte JSON deve ser enviado:_
+*Para editar uma nova tarefa, o usuário deve estar autenticado e o seguinte JSON deve ser enviado:*
 
 ```
 {
@@ -379,7 +387,7 @@ _Para editar uma nova tarefa, o usuário deve estar autenticado e o seguinte JSO
 
 **Ao atualizar uma tarefa, a mesma não poderá ser atualizada novamente.**
 
-_Em caso de sucesso, a seguinte resposta será retornada:_
+*Em caso de sucesso, a seguinte resposta será retornada:*
 
 ```
 {
@@ -389,17 +397,17 @@ _Em caso de sucesso, a seguinte resposta será retornada:_
 
 ### Validações da rota
 
-_A aplicação realiza algumas verificações antes de atualizar uma tarefa:_
+*A aplicação realiza algumas verificações antes de atualizar uma tarefa:*
 
--   Caso enviada, a descrição(description) deve ser uma string com pelo menos 5 caracteres;
--   Caso enviado, o prazo(deadline) deve ser uma string no formato mm/dd/yyyy, a data deve ser válida e a não pode ser menor ou igual ao dia atual;
--   Caso enviado, o campo is_finished deve ser um booleano;
--   Uma tarefa marcada como finalizada não pode ser editada;
--   A tarefa que será atualizada deve ser existente, seu id deve ser passado em conjunto com a url;
--   Apenas o dono da tarefa pode editá-la;
--   O usuário deve estar autenticado e essa autenticação deve ser válida (token jwt);
+* Caso enviada, a descrição(description) deve ser uma string com pelo menos 5 caracteres;
+* Caso enviado, o prazo(deadline) deve ser uma string no formato mm/dd/yyyy, a data deve ser válida e a não pode ser menor ou igual ao dia atual;
+* Caso enviado, o campo is_finished deve ser um booleano;
+* Uma tarefa marcada como finalizada não pode ser editada;
+* A tarefa que será atualizada deve ser existente, seu id deve ser passado em conjunto com a url;
+* Apenas o dono da tarefa pode editá-la;
+* O usuário deve estar autenticado e essa autenticação deve ser válida (token jwt);
 
-_Resposta - Descrição com menos de 5 caracteres:_
+*Resposta - Descrição com menos de 5 caracteres:*
 
 ```
 {
@@ -409,7 +417,7 @@ _Resposta - Descrição com menos de 5 caracteres:_
 }
 ```
 
-_Resposta - Tipo de valor inválido para descrição:_
+*Resposta - Tipo de valor inválido para descrição:*
 
 ```
 {
@@ -419,7 +427,7 @@ _Resposta - Tipo de valor inválido para descrição:_
 }
 ```
 
-_Resposta - Prazo fora do formato mm/dd/yyyy:_
+*Resposta - Prazo fora do formato mm/dd/yyyy:*
 
 ```
 {
@@ -429,7 +437,7 @@ _Resposta - Prazo fora do formato mm/dd/yyyy:_
 }
 ```
 
-_Resposta - Prazo com data menor que o dia atual:_
+*Resposta - Prazo com data menor que o dia atual:*
 
 ```
 {
@@ -439,7 +447,7 @@ _Resposta - Prazo com data menor que o dia atual:_
 }
 ```
 
-_Reposta - Tipo inválido para is_finished_
+*Reposta - Tipo inválido para is_finished:*
 
 ```
 {
@@ -449,8 +457,7 @@ _Reposta - Tipo inválido para is_finished_
 }
 ```
 
-_Resposta - Tarefa finalizada_
-
+*Resposta - Tarefa finalizada:*
 ```
 {
 	"status": "error",
@@ -459,8 +466,7 @@ _Resposta - Tarefa finalizada_
 }
 ```
 
-_Resposta - Tarefa inexistente_
-
+*Resposta - Tarefa inexistente:*
 ```
 {
 	"status": "error",
@@ -469,8 +475,7 @@ _Resposta - Tarefa inexistente_
 }
 ```
 
-_Resposta - Atualizando tarefa de outro usuario_
-
+*Resposta -  Atualizando tarefa de outro usuario:*
 ```
 {
 	"status": "error",
@@ -479,7 +484,7 @@ _Resposta - Atualizando tarefa de outro usuario_
 }
 ```
 
-_Resposta - Sem autenticação:_
+*Resposta - Sem autenticação:*
 
 ```
 {
@@ -489,7 +494,8 @@ _Resposta - Sem autenticação:_
 }
 ```
 
-_Resposta - Autenticação inválida:_
+
+*Resposta - Autenticação inválida:*
 
 ```
 {
@@ -503,11 +509,13 @@ _Resposta - Autenticação inválida:_
 
 ### GET - Listar as próprias tarefas
 
-_Para listar suas tarefas, o usuário deve estar autenticado:_
+*Para listar suas tarefas, o usuário deve estar autenticado.*
 
-**Um usuário tem acesso somente as suas próprias tarefas**
 
-_Em caso de sucesso, a seguinte resposta será retornada:_
+**Um usuário tem acesso somente as suas próprias tarefas.**
+
+
+*Em caso de sucesso, a seguinte resposta será retornada:*
 
 ```
 {
@@ -534,11 +542,11 @@ _Em caso de sucesso, a seguinte resposta será retornada:_
 
 ### Validações da rota
 
-_A aplicação realiza algumas verificações antes de atualizar uma tarefa:_
+*A aplicação realiza algumas verificações antes de atualizar uma tarefa:*
 
--   O usuário deve estar autenticado e essa autenticação deve ser válida (token jwt);
+* O usuário deve estar autenticado e essa autenticação deve ser válida (token jwt);
 
-_Resposta - Sem autenticação:_
+*Resposta - Sem autenticação:*
 
 ```
 {
@@ -548,7 +556,8 @@ _Resposta - Sem autenticação:_
 }
 ```
 
-_Resposta - Autenticação inválida:_
+
+*Resposta - Autenticação inválida:*
 
 ```
 {
@@ -563,13 +572,11 @@ _Resposta - Autenticação inválida:_
 ### GET - Listar e filtrar todas as tarefas
 
 **Para visualizar apenas as tarefas atrasadas, o parâmetro late deve ser passado na url:**
-
 ```
 https://api-ubis.herokuapp.com/tasks/admin?late=true
 ```
 
-**Seguem dados de usuário administrador**
-
+**Seguem dados de usuário administrador:**
 ```
 {
 	"email": "superadm@email.com",
@@ -577,9 +584,10 @@ https://api-ubis.herokuapp.com/tasks/admin?late=true
 }
 ```
 
-_Essa rota esta disponível apenas para usuários administradores, devidamente autenticados:_
+*Essa rota esta disponível apenas para usuários administradores, devidamente autenticados.*
 
-_Em caso de sucesso, a seguinte resposta será retornada:_
+
+*Em caso de sucesso, a seguinte resposta será retornada:*
 
 ```
 {
@@ -611,12 +619,12 @@ _Em caso de sucesso, a seguinte resposta será retornada:_
 
 ### Validações da rota
 
-_A aplicação realiza algumas verificações antes de atualizar uma tarefa:_
+*A aplicação realiza algumas verificações antes de atualizar uma tarefa:*
 
--   O usuário deve estar autenticado e essa autenticação deve ser válida (token jwt);
--   O usuário deve ser administrador
+* O usuário deve estar autenticado e essa autenticação deve ser válida (token jwt);
+* O usuário deve ser administrador;
 
-_Resposta - Sem autenticação:_
+*Resposta - Sem autenticação:*
 
 ```
 {
@@ -626,7 +634,8 @@ _Resposta - Sem autenticação:_
 }
 ```
 
-_Resposta - Autenticação inválida:_
+
+*Resposta - Autenticação inválida:*
 
 ```
 {
@@ -636,7 +645,7 @@ _Resposta - Autenticação inválida:_
 }
 ```
 
-_Resposta - Usuário não administrador:_
+*Resposta - Usuário não administrador:*
 
 ```
 {
@@ -645,3 +654,4 @@ _Resposta - Usuário não administrador:_
 	"message": "Unauthorized"
 }
 ```
+
