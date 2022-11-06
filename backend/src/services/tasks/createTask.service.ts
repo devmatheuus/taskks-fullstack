@@ -5,11 +5,19 @@ import { Account } from '../../entities/account.entity';
 import { AppError } from '../../errors/AppError';
 
 import { ICreateTaskRequest } from '../../interfaces/task';
+import getDateInNumber from '../../utils/getDateInNumber';
 
 const createTaskService = async (
     account_id: string,
     { deadline, description }: ICreateTaskRequest
 ) => {
+    const today = new Date().getTime();
+    const deadlineTimeHour = getDateInNumber(deadline);
+
+    if (deadlineTimeHour < today) {
+        throw new AppError(400, 'Invalide deadline.');
+    }
+
     const taskRepository = AppDataSource.getRepository(Task);
     const accountRepository = AppDataSource.getRepository(Account);
 
