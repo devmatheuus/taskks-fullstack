@@ -13,6 +13,8 @@ export class initalCreate1666979416206 implements MigrationInterface {
         await queryRunner.query(
             `ALTER TABLE "tasks" ADD CONSTRAINT "FK_d0a1ad33ba08146aa395e629113" FOREIGN KEY ("accountId") REFERENCES "accounts"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`
         );
+        await queryRunner.query(`INSERT INTO accounts (email, password, is_admin) VALUES ('superadm@email.com', 'super', true)
+`);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

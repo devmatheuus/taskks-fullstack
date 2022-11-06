@@ -5,7 +5,7 @@ import {
 
 export const createTask: ICreateTaskRequest = {
     description: 'Lavar a louça',
-    deadline: '5/12/2020'
+    deadline: '5/12/2025'
 };
 
 export const updateTask: IUpdateTaskRequest = {
@@ -15,7 +15,7 @@ export const updateTask: IUpdateTaskRequest = {
 
 export const invalidDescription = {
     description: [true],
-    deadline: '5/12/2020'
+    deadline: '5/12/2025'
 };
 
 export const invalidDeadline: IUpdateTaskRequest = {
@@ -34,7 +34,7 @@ export const lateTask: IUpdateTaskRequest = {
 
 export const istNotLate: IUpdateTaskRequest = {
     description: 'ITS NOT LATE',
-    deadline: '20/10/2042'
+    deadline: '20/10/2025'
 };
 
 export const invalidFieldToUpdate = {
