@@ -650,16 +650,7 @@ _Resposta - Usuário não administrador:_
 }
 ```
 
-# Frontend - Instalação das dependências
-
-_Após clonar o repositório, execute os seguintes comandos a partir da pasta do projeto para instalar os pacotes necessários:_
-
-```bash
-
-  cd frontend
-
-  yarn
-```
+# Frontend
 
 ### Formas de execução do projeto
 
@@ -694,3 +685,13 @@ yarn dev
 ```
 
 **A aplicação será iniciada na porta local 3000.**
+
+### Autenticação de rotas
+
+-   _Caso o usúario já esteja autenticado, ele não conseguirá acessar as páginas de login e cadastro, pois será redirecionado automaticamente para sua respectiva dashboard;_
+-   _Usuários não autenticados não poderão acessar a dashboard;_
+-   Somente usuários administradores podem acessar o enpoint /tasks/admin;
+
+### Rotas inexistentes
+
+-   A aplicação conta com uma página 404, que entrará em ação sempre que o usuário tentar acessar uma rota que não existe;
