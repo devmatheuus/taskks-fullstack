@@ -23,6 +23,13 @@ _Existem três formas para executar a API:_
 -   _Executando o projeto localmente_
 -   _Url do deploy_
 
+```
+Dica: 
+
+Para testar os endpoints da api, você pode importar o workspace pronto em seu insomnia,
+basta copiar o conteúdo do arquivo "insomnia.json", que está dentro da pasta backend. 
+```
+
 ### Docker
 
 -   _Crie um arquivo **.env** na raíz da pasta backend_
