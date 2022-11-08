@@ -46,11 +46,8 @@ export const AdminProvider = ({ children }: IGenericChildren) => {
             })
             .catch(() => {
                 localStorage.clear();
-                toast.error(
-                    'Erro ao carregar informações, faça login novamente'
-                );
+                toast.error('Erro ao carregar tarefas, faça login novamente');
                 toast.dismiss();
-                history.push('/');
             });
     };
 

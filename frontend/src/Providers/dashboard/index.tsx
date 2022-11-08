@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
 
@@ -21,8 +20,6 @@ export const UseDash = () => {
 };
 
 export const DashProvider = ({ children }: IGenericChildren) => {
-    const history = useHistory();
-
     const [showModal, setShowModal] = useState(false);
 
     const [showModalUpdate, setShowModalUpdate] = useState(false);
@@ -46,8 +43,9 @@ export const DashProvider = ({ children }: IGenericChildren) => {
                 toast.dismiss();
             })
             .catch(() => {
-                history.push('/');
+                localStorage.clear();
                 toast.error('Erro ao carregar tarefas, faça login novamente');
+                toast.dismiss();
             });
     };
 

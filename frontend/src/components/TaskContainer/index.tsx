@@ -7,25 +7,15 @@ import { UseAuth } from '../../Providers/auth/index';
 
 import { useEffect } from 'react';
 import NoTasks from '../NoTasks';
-import { Redirect } from 'react-router-dom';
 
 const TaskContainer = () => {
-    const { setShowModal, loadTasks, tasks } = UseDash();
-    const { setAuthenticated } = UseAuth();
-
     const { token } = UseAuth();
 
     useEffect(() => {
-        try {
-            loadTasks(token);
-        } catch (error) {
-            setAuthenticated(false);
-
-            <Redirect to="/" />;
-
-            localStorage.clear();
-        }
+        loadTasks(token);
     }, []);
+
+    const { setShowModal, loadTasks, tasks } = UseDash();
 
     return (
         <StyledTaskContainer>
